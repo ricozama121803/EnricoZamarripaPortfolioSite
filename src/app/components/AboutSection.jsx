@@ -10,11 +10,14 @@ const TAB_DATA = [
     content: (
       <ul className="list-disc pl-2">
         <li>Node.js</li>
-        <li>Express</li>
-        <li>PostgreSQL</li>
-        <li>Sequelize</li>
+        <li>Next.js</li>
+        <li>Firebase</li>
+        <li>Material UI</li>
         <li>JavaScript</li>
         <li>React</li>
+        <li>Bootstrap</li>
+        <li>Puppeteer</li>
+        
       </ul>
     ),
   },
@@ -23,8 +26,12 @@ const TAB_DATA = [
     id: "education",
     content: (
       <ul className="list-disc pl-2">
-        <li>Fullstack Academy of Code</li>
-        <li>University of California, Santa Cruz</li>
+        <li>C++</li>
+        <li>C#</li>
+        <li>JavaScript</li>
+        <li>CSS</li>
+        <li>HTML</li>
+        <li>Python</li>
       </ul>
     ),
   },
@@ -33,8 +40,8 @@ const TAB_DATA = [
     id: "certifications",
     content: (
       <ul className="list-disc pl-2">
-        <li>AWS Cloud Practitioner</li>
-        <li>Google Professional Cloud Developer</li>
+        <li>Pathways to STEM - Experiential Learning Modules</li>
+        <li>HeadstarterAI - Software Engineering Fellowship</li>
       </ul>
     ),
   },
@@ -53,16 +60,11 @@ const AboutSection = () => {
   return (
     <section className="text-white" id="about">
       <div className="md:grid md:grid-cols-2 gap-8 items-center py-8 px-4 xl:gap-16 sm:py-16 xl:px-16">
-        <Image src="/images/about-image.png" width={500} height={500} />
+        <Image src="/images/about-image2.png" width={500} height={500} />
         <div className="mt-4 md:mt-0 text-left flex flex-col h-full">
           <h2 className="text-4xl font-bold text-white mb-4">About Me</h2>
           <p className="text-base lg:text-lg">
-            I am a full stack web developer with a passion for creating
-            interactive and responsive web applications. I have experience
-            working with JavaScript, React, Redux, Node.js, Express, PostgreSQL,
-            Sequelize, HTML, CSS, and Git. I am a quick learner and I am always
-            looking to expand my knowledge and skill set. I am a team player and
-            I am excited to work with others to create amazing applications.
+            I am Enrico Zamarripa, a Computer Science student passionate about software development with a strong foundation in both theory and practical experience. I have worked on various AI-driven and web-based projects, participated in STEM learning modules, and contributed to robotics and cybersecurity clubs. I am adaptable, eager to learn, and committed to growing as a software engineer through innovative projects and teamwork.
           </p>
           <div className="flex flex-row justify-start mt-8">
             <TabButton
@@ -70,21 +72,21 @@ const AboutSection = () => {
               active={tab === "skills"}
             >
               {" "}
-              Skills{" "}
+              Frameworks/libs{" "}
             </TabButton>
             <TabButton
               selectTab={() => handleTabChange("education")}
               active={tab === "education"}
             >
               {" "}
-              Education{" "}
+              Languages{" "}
             </TabButton>
             <TabButton
               selectTab={() => handleTabChange("certifications")}
               active={tab === "certifications"}
             >
               {" "}
-              Certifications{" "}
+              Experience{" "}
             </TabButton>
           </div>
           <div className="mt-8">
