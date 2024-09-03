@@ -36,7 +36,7 @@ const HeroSection = () => {
             />
           </h1>
           <p className="text-[#ADB7BE] text-base sm:text-lg mb-6 lg:text-xl">
-          As a first-generation college student, I'm eager to expand my skill set and network within the tech industry. My interests include web development, cybersecurity, and full-stack development. After a year of coding, I’m proud of the progress I’ve made and excited to continue improving and advancing my skills.
+          As a first-generation college student, I&apos;m eager to expand my skill set and network within the tech industry. My interests include web development, cybersecurity, and full-stack development. After a year of coding, I’m proud of the progress I’ve made and excited to continue improving and advancing my skills.
           </p>
           <div>
             <a
