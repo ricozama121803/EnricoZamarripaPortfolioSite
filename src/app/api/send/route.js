@@ -10,19 +10,18 @@ export async function POST(req, res) {
   try {
     const data = await resend.emails.send({
       from: fromEmail,
-      to: [fromEmail, email],
+      to: [fromEmail, email],  // Sends a copy to both you and the user
       subject: subject,
-      react: (
-        <>
-          <h1>{subject}</h1>
-          <p>Thank you for contacting us!</p>
-          <p>New message submitted:</p>
-          <p>{message}</p>
-        </>
-      ),
+      html: `
+        <h1>${subject}</h1>
+        <p>Thank you for contacting us!</p>
+        <p>New message submitted:</p>
+        <p>${message}</p>
+      `,
     });
-    return NextResponse.json(data);
+    return NextResponse.json({ success: true, data });
   } catch (error) {
-    return NextResponse.json({ error });
+    console.error('Error sending email:', error);
+    return NextResponse.json({ success: false, error });
   }
 }
