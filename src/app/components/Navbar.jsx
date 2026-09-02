@@ -1,15 +1,19 @@
-"use client";  // Add this at the top
+"use client";
 
 import Link from "next/link";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import NavLink from "./NavLink";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/solid";
 import MenuOverlay from "./MenuOverlay";
 
 const navLinks = [
   {
-    title: "About",
-    path: "#about",
+    title: "Intro",
+    path: "#home",
+  },
+  {
+    title: "Skills",
+    path: "#skills",
   },
   {
     title: "Projects",
@@ -19,26 +23,35 @@ const navLinks = [
     title: "Contact",
     path: "#contact",
   },
-  {
-    title: "Resume", // Add the Resume link
-    path: "#resume", // Placeholder path, but handled differently in code
-  },
 ];
 
 const Navbar = () => {
   const [navbarOpen, setNavbarOpen] = useState(false);
+  const [activeSection, setActiveSection] = useState("home");
+
+  useEffect(() => {
+    const sectionIds = navLinks.map((link) => link.path.slice(1));
+    const sections = sectionIds
+      .map((id) => document.getElementById(id))
+      .filter(Boolean);
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setActiveSection(entry.target.id);
+          }
+        });
+      },
+      { rootMargin: "-45% 0px -50% 0px", threshold: 0 }
+    );
+
+    sections.forEach((section) => observer.observe(section));
+    return () => observer.disconnect();
+  }, []);
 
   const handleScroll = (e, path) => {
     e.preventDefault();
-
-    if (path === "#resume") {
-      // Scroll to the top for the "Resume" link
-      window.scrollTo({
-        top: 0,
-        behavior: "smooth",
-      });
-      return;
-    }
 
     const target = document.querySelector(path);
     const offset = 80; // Adjust this value for scroll offset
@@ -52,6 +65,7 @@ const Navbar = () => {
         behavior: "smooth",
       });
     }
+    setNavbarOpen(false);
   };
 
   return (
@@ -82,21 +96,34 @@ const Navbar = () => {
         </div>
         <div className="menu hidden md:block md:w-auto" id="navbar">
           <ul className="flex p-4 md:p-0 md:flex-row md:space-x-8 mt-0">
-            {navLinks.map((link, index) => (
-              <li key={index}>
-                <a
-                  href={link.path}
-                  onClick={(e) => handleScroll(e, link.path)}
-                  className="text-white hover:text-gray-300"
-                >
-                  {link.title}
-                </a>
-              </li>
-            ))}
+            {navLinks.map((link, index) => {
+              const isActive = activeSection === link.path.slice(1);
+              return (
+                <li key={index}>
+                  <a
+                    href={link.path}
+                    onClick={(e) => handleScroll(e, link.path)}
+                    className={`relative pb-1 transition-colors ${
+                      isActive
+                        ? "text-white font-semibold after:absolute after:left-0 after:-bottom-1 after:h-0.5 after:w-full after:bg-indigo-400"
+                        : "text-[#ADB7BE] hover:text-white"
+                    }`}
+                  >
+                    {link.title}
+                  </a>
+                </li>
+              );
+            })}
           </ul>
         </div>
       </div>
-      {navbarOpen ? <MenuOverlay links={navLinks} /> : null}
+      {navbarOpen ? (
+        <MenuOverlay
+          links={navLinks}
+          activeSection={activeSection}
+          onLinkClick={handleScroll}
+        />
+      ) : null}
     </nav>
   );
 };

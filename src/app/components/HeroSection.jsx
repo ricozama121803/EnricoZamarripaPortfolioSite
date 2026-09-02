@@ -6,7 +6,7 @@ import { motion } from "framer-motion";
 
 const HeroSection = () => {
   return (
-    <section className="lg:py-16">
+    <section className="lg:py-16" id="home">
       <div className="grid grid-cols-1 sm:grid-cols-12">
         <motion.div
           initial={{ opacity: 0, scale: 0.5 }}
@@ -23,11 +23,11 @@ const HeroSection = () => {
               sequence={[
                 "Enrico",
                 1000,
-                "Web Developer",
+                "Software Developer",
                 1000,
-                "CS Student",
+                "Mechanical Engineering Student",
                 1000,
-                "UI/UX Designer",
+                "Full-Stack Engineer",
                 1000,
               ]}
               wrapper="span"
@@ -36,14 +36,14 @@ const HeroSection = () => {
             />
           </h1>
           <p className="text-[#ADB7BE] text-base sm:text-lg mb-6 lg:text-xl">
-          As a first-generation college student, I&apos;m eager to expand my skill set and network within the tech industry. My interests include web development, cybersecurity, and full-stack development. After a year of coding, I’m proud of the progress I’ve made and excited to continue improving and advancing my skills.
+          🚀 CSUF Sophomore studying Mechanical Engineering, and a Software Developer focused on building intuitive, impactful web applications. I bring hands-on experience across full-stack development, AWS, and modern DevOps practices. Currently building at AUTODCP, and always excited to keep learning and shipping.
           </p>
           <div>
             <a
               href="/#contact"
               className="px-6 inline-block py-3 w-full sm:w-fit rounded-full mr-4 bg-gradient-to-br from-indigo-800 via-denim-600 to-indigo-400 hover:bg-slate-200 text-white"
             >
-              Hire Me
+              Contact Me
             </a>
             <a
   href="/enricoResumeDownload.pdf"  // Corrected path to the PDF file

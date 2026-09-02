@@ -22,7 +22,34 @@ const projectsData = [
     tag: ["All", "Web"],
     gitUrl: "https://github.com/ricozama121803/HeadstarterTeam-flashcard-saas/tree/main",
     previewUrl: "https://headstarter-team-flashcard-saas-five.vercel.app/",
-  }
+  },
+  {
+    id: 3,
+    title: "SceneScout",
+    description: "A community-driven platform for finding filming locations. Filmmakers and photographers browse a map of curated spots, filter by tags, and share their own hidden gems.",
+    image: "/images/projects/3.png",
+    tag: ["All", "Web"],
+    gitUrl: "https://github.com/ricozama121803/SceneScout",
+    previewUrl: "https://scene-scout-brown.vercel.app/",
+  },
+  {
+    id: 4,
+    title: "Snap Shelf",
+    description: "A Chrome extension for saving the exact piece of a webpage you need — a highlighted quote, a cropped screenshot, or an image — into a searchable, tagged side panel instead of leaving tabs open for reference.",
+    image: "/images/projects/7.png",
+    tag: ["All", "Tools"],
+    gitUrl: "https://github.com/ricozama121803/snap-shelf",
+    previewUrl: "https://github.com/ricozama121803/snap-shelf",
+  },
+  {
+    id: 5,
+    title: "Film Fest Scraper",
+    description: "A Python pipeline that crawls Wikipedia, FilmFreeway, and regional directories to discover film festivals, maintaining a single deduplicated CSV database that refreshes on every run.",
+    image: "/images/projects/8.png",
+    tag: ["All", "Tools"],
+    gitUrl: "https://github.com/ricozama121803/film-fest-scraper",
+    previewUrl: "https://github.com/ricozama121803/film-fest-scraper",
+  },
 ];
 
 const ProjectsSection = () => {
@@ -46,7 +73,7 @@ const ProjectsSection = () => {
   return (
     <section id="projects">
       <h2 className="text-center text-4xl font-bold text-white mt-4 mb-8 md:mb-12">
-        My Projects (Uploading more soon! Refer to Resume)
+        My Projects
       </h2>
       <div className="text-white flex flex-row justify-center items-center gap-2 py-6">
         <ProjectTag
@@ -60,7 +87,11 @@ const ProjectsSection = () => {
           name="Web"
           isSelected={tag === "Web"}
         />
-       
+        <ProjectTag
+          onClick={handleTagChange}
+          name="Tools"
+          isSelected={tag === "Tools"}
+        />
       </div>
       <ul ref={ref} className="grid md:grid-cols-3 gap-8 md:gap-12">
         {filteredProjects.map((project, index) => (
