@@ -11,19 +11,37 @@ const SKILL_CATEGORIES = [
   },
   {
     title: "Languages",
-    items: ["JavaScript", "TypeScript", "Python", "SQL", "PHP"],
+    items: ["JavaScript", "TypeScript", "Python", "SQL", "PHP", "Java", "C++", "C#"],
   },
   {
     title: "Frameworks",
-    items: ["React", "React Native", "Vue", "Next.js", "Node", "Express", "Flask"],
+    items: [
+      "React",
+      "React Native",
+      "Vue",
+      "Next.js",
+      "Node",
+      "Express",
+      "Flask",
+      "Expo",
+      "BeautifulSoup",
+    ],
   },
   {
     title: "Testing",
-    items: ["Jest", "Playwright", "Puppeteer"],
+    items: ["Jest", "Playwright", "Puppeteer", "Selenium"],
   },
   {
     title: "Cloud & DevOps",
-    items: ["AWS", "Terraform", "Serverless Framework", "Cloudflare", "GitLab CI/CD"],
+    items: [
+      "AWS",
+      "Terraform",
+      "Serverless Framework",
+      "Cloudflare",
+      "GitLab CI/CD",
+      "Firebase",
+      "Supabase",
+    ],
   },
   {
     title: "Design",
@@ -31,21 +49,7 @@ const SKILL_CATEGORIES = [
   },
   {
     title: "Tools",
-    items: ["Git", "Docker", "Linux", "Bash", "MySQL", "WordPress", "Soldering"],
-  },
-  {
-    title: "Also Familiar With",
-    items: [
-      "Java",
-      "C++",
-      "C#",
-      "Selenium",
-      "BeautifulSoup",
-      "PowerShell",
-      "Firebase",
-      "Supabase",
-      "Expo",
-    ],
+    items: ["Git", "Docker", "Linux", "Bash", "MySQL", "WordPress", "Soldering", "PowerShell"],
   },
 ];
 
@@ -59,28 +63,28 @@ const SkillsSection = () => {
         <h2 className="text-3xl sm:text-4xl font-bold text-white mb-6 sm:mb-8">
           Skills & Experience
         </h2>
-        <div className="flex overflow-x-auto sm:flex-wrap gap-2 pb-2 -mx-4 px-4 sm:mx-0 sm:px-0 no-scrollbar">
+        <div className="flex overflow-x-auto sm:flex-wrap gap-x-6 gap-y-2 border-b border-[#33353F] -mx-4 px-4 sm:mx-0 sm:px-0 no-scrollbar">
           {SKILL_CATEGORIES.map((category) => (
             <button
               key={category.title}
               onClick={() => setActive(category.title)}
-              className={`shrink-0 rounded-full border-2 px-4 py-2 text-sm sm:text-base whitespace-nowrap transition-colors ${
+              className={`shrink-0 relative pb-3 text-sm sm:text-base whitespace-nowrap transition-colors ${
                 active === category.title
-                  ? "text-white border-indigo-400 bg-indigo-400/10"
-                  : "text-[#ADB7BE] border-slate-600 hover:border-white"
+                  ? "text-white font-semibold after:absolute after:left-0 after:-bottom-px after:h-0.5 after:w-full after:bg-indigo-400"
+                  : "text-[#ADB7BE] hover:text-white"
               }`}
             >
               {category.title}
             </button>
           ))}
         </div>
-        <div className="flex flex-wrap gap-3 mt-6 min-h-[3rem]">
-          {activeCategory.items.map((item) => (
-            <span
-              key={item}
-              className="text-sm sm:text-base text-[#ADB7BE] bg-[#181818] border border-[#33353F] rounded-full px-4 py-2"
-            >
+        <div className="mt-6 min-h-[3rem] text-[#ADB7BE] text-base sm:text-lg leading-relaxed">
+          {activeCategory.items.map((item, i) => (
+            <span key={item}>
               {item}
+              {i < activeCategory.items.length - 1 && (
+                <span className="text-indigo-400 mx-2">&middot;</span>
+              )}
             </span>
           ))}
         </div>

@@ -1,10 +1,49 @@
 "use client";
-import React from "react";
+import React, { useLayoutEffect, useRef, useState } from "react";
 import Image from "next/image";
 import { TypeAnimation } from "react-type-animation";
 import { motion } from "framer-motion";
 
 const HeroSection = () => {
+  const rowRef = useRef(null);
+  const textRef = useRef(null);
+  const [scale, setScale] = useState(1);
+
+  useLayoutEffect(() => {
+    const row = rowRef.current;
+    const text = textRef.current;
+    if (!row || !text) return;
+
+    let frame;
+    const fit = () => {
+      cancelAnimationFrame(frame);
+      frame = requestAnimationFrame(() => {
+        const rowWidth = row.clientWidth;
+        const textWidth = text.scrollWidth;
+        if (!rowWidth || !textWidth) return;
+        setScale(Math.min(1, rowWidth / textWidth));
+      });
+    };
+
+    fit();
+
+    const resizeObserver = new ResizeObserver(fit);
+    resizeObserver.observe(row);
+
+    const mutationObserver = new MutationObserver(fit);
+    mutationObserver.observe(text, {
+      characterData: true,
+      childList: true,
+      subtree: true,
+    });
+
+    return () => {
+      cancelAnimationFrame(frame);
+      resizeObserver.disconnect();
+      mutationObserver.disconnect();
+    };
+  }, []);
+
   return (
     <section className="lg:py-16" id="home">
       <div className="grid grid-cols-1 sm:grid-cols-12">
@@ -12,28 +51,36 @@ const HeroSection = () => {
           initial={{ opacity: 0, scale: 0.5 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.5 }}
-          className="col-span-8 place-self-center text-center sm:text-left justify-self-start"
+          className="col-span-8 min-w-0 w-full place-self-center text-center sm:text-left justify-self-start"
         >
-          <h1 className="text-white mb-4 text-3xl sm:text-5xl md:text-6xl lg:text-8xl lg:leading-normal font-extrabold">
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-800 via-denim-600 to-indigo-400">
-              Hello, I&apos;m{" "}
+          <h1 className="text-white mb-4 font-extrabold">
+            <span className="block text-3xl sm:text-5xl md:text-6xl lg:text-8xl text-transparent bg-clip-text bg-gradient-to-r from-indigo-800 via-denim-600 to-indigo-400">
+              Hello, I&apos;m
             </span>
-            <br></br>
-            <TypeAnimation
-              sequence={[
-                "Enrico",
-                1000,
-                "Software Developer",
-                1000,
-                "Mechanical Engineering Student",
-                1000,
-                "Full-Stack Engineer",
-                1000,
-              ]}
-              wrapper="span"
-              speed={50}
-              repeat={Infinity}
-            />
+            <span
+              ref={rowRef}
+              className="block w-full overflow-hidden text-3xl sm:text-5xl md:text-6xl lg:text-8xl leading-tight"
+            >
+              <span
+                ref={textRef}
+                className="inline-block whitespace-nowrap origin-left"
+                style={{ transform: `scale(${scale})` }}
+              >
+                <TypeAnimation
+                  sequence={[
+                    "Enrico",
+                    1000,
+                    "a Software Developer",
+                    1000,
+                    "a Mechanical Engineering Student",
+                    1000,
+                  ]}
+                  wrapper="span"
+                  speed={50}
+                  repeat={Infinity}
+                />
+              </span>
+            </span>
           </h1>
           <p className="text-[#ADB7BE] text-base sm:text-lg mb-6 lg:text-xl">
           🚀 CSUF Sophomore studying Mechanical Engineering, and a Software Developer focused on building intuitive, impactful web applications. I bring hands-on experience across full-stack development, AWS, and modern DevOps practices. Currently building at AUTODCP, and always excited to keep learning and shipping.
@@ -41,20 +88,10 @@ const HeroSection = () => {
           <div>
             <a
               href="/#contact"
-              className="px-6 inline-block py-3 w-full sm:w-fit rounded-full mr-4 bg-gradient-to-br from-indigo-800 via-denim-600 to-indigo-400 hover:bg-slate-200 text-white"
+              className="px-6 inline-block py-3 w-full sm:w-fit rounded-full bg-gradient-to-br from-indigo-800 via-denim-600 to-indigo-400 hover:bg-slate-200 text-white"
             >
               Contact Me
             </a>
-            <a
-  href="/enricoResumeDownload.pdf"  // Corrected path to the PDF file
-  download  // This attribute prompts the file to be downloaded when clicked
-  className="px-1 inline-block py-1 w-full sm:w-fit rounded-full bg-gradient-to-br from-indigo-800 via-denim-600 to-indigo-400 hover:bg-slate-800 text-white mt-3"
->
-  <span className="block bg-[#121212] hover:bg-slate-800 rounded-full px-5 py-2">
-    Download Resume
-  </span>
-</a>
-
           </div>
         </motion.div>
         <motion.div
