@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { useState } from "react";
 
 const SKILL_CATEGORIES = [
   {
@@ -50,30 +50,38 @@ const SKILL_CATEGORIES = [
 ];
 
 const SkillsSection = () => {
+  const [active, setActive] = useState(SKILL_CATEGORIES[0].title);
+  const activeCategory = SKILL_CATEGORIES.find((c) => c.title === active);
+
   return (
     <section className="text-white" id="skills">
-      <div className="px-4 pt-8 pb-8 xl:px-16 sm:pt-16 sm:pb-16">
-        <h2 className="text-4xl font-bold text-white mb-8">Skills & Experience</h2>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+      <div className="px-4 pt-8 pb-8 sm:px-6 lg:px-12 xl:px-16 sm:pt-16 sm:pb-16">
+        <h2 className="text-3xl sm:text-4xl font-bold text-white mb-6 sm:mb-8">
+          Skills & Experience
+        </h2>
+        <div className="flex overflow-x-auto sm:flex-wrap gap-2 pb-2 -mx-4 px-4 sm:mx-0 sm:px-0 no-scrollbar">
           {SKILL_CATEGORIES.map((category) => (
-            <div
+            <button
               key={category.title}
-              className="bg-[#181818] border border-[#33353F] rounded-lg p-5"
+              onClick={() => setActive(category.title)}
+              className={`shrink-0 rounded-full border-2 px-4 py-2 text-sm sm:text-base whitespace-nowrap transition-colors ${
+                active === category.title
+                  ? "text-white border-indigo-400 bg-indigo-400/10"
+                  : "text-[#ADB7BE] border-slate-600 hover:border-white"
+              }`}
             >
-              <h3 className="text-indigo-400 font-semibold text-sm uppercase tracking-wider mb-3">
-                {category.title}
-              </h3>
-              <div className="flex flex-wrap gap-2">
-                {category.items.map((item) => (
-                  <span
-                    key={item}
-                    className="text-xs sm:text-sm text-[#ADB7BE] bg-[#0d0d0d] border border-[#2b2d31] rounded-full px-3 py-1"
-                  >
-                    {item}
-                  </span>
-                ))}
-              </div>
-            </div>
+              {category.title}
+            </button>
+          ))}
+        </div>
+        <div className="flex flex-wrap gap-3 mt-6 min-h-[3rem]">
+          {activeCategory.items.map((item) => (
+            <span
+              key={item}
+              className="text-sm sm:text-base text-[#ADB7BE] bg-[#181818] border border-[#33353F] rounded-full px-4 py-2"
+            >
+              {item}
+            </span>
           ))}
         </div>
       </div>
