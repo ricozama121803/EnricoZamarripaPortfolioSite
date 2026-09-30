@@ -50,6 +50,24 @@ const projectsData = [
     gitUrl: "https://github.com/ricozama121803/film-fest-scraper",
     previewUrl: "https://github.com/ricozama121803/film-fest-scraper",
   },
+  {
+    id: 6,
+    title: "3DS Homebrew",
+    description: "Nintendo 3DS games written in C with devkitPro and citro2d/citro3d, including Ringside (3D kickboxing with fighter AI and a custom shader), Tuffy Run (endless runner), and a top-down open-world crime sandbox. Each has a PC harness for previews and logic tests.",
+    image: "/images/projects/9.png",
+    tag: ["All", "Games"],
+    gitUrl: "https://github.com/ricozama121803/3ds-homebrew",
+    previewUrl: "https://github.com/ricozama121803/3ds-homebrew",
+  },
+  {
+    id: 7,
+    title: "Statics Playground",
+    description: "An interactive single-file web app for learning engineering statics. Drag forces to explore moments, beam reactions, and 2D/3D cable equilibrium, with live equations, diagrams, and a scored Challenge mode.",
+    image: "/images/projects/10.png",
+    tag: ["All", "Web", "Tools"],
+    gitUrl: "https://github.com/ricozama121803/statics-playground",
+    previewUrl: "https://github.com/ricozama121803/statics-playground",
+  },
 ];
 
 const ProjectsSection = () => {
@@ -91,6 +109,11 @@ const ProjectsSection = () => {
           onClick={handleTagChange}
           name="Tools"
           isSelected={tag === "Tools"}
+        />
+        <ProjectTag
+          onClick={handleTagChange}
+          name="Games"
+          isSelected={tag === "Games"}
         />
       </div>
       <ul ref={ref} className="grid md:grid-cols-3 gap-8 md:gap-12">
