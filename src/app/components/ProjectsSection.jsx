@@ -68,6 +68,24 @@ const projectsData = [
     gitUrl: "https://github.com/ricozama121803/statics-playground",
     previewUrl: "https://github.com/ricozama121803/statics-playground",
   },
+  {
+    id: 8,
+    title: "cpop",
+    description: "A tiny Linux CLI: put cpop in front of any command and its output is copied to the clipboard. Formats the copy as an aligned table, Markdown, or JSON, and ships with a man page and bash/zsh/fish tab completion.",
+    image: "/images/projects/11.png",
+    tag: ["All", "Tools"],
+    gitUrl: "https://github.com/ricozama121803/cpop",
+    previewUrl: "https://github.com/ricozama121803/cpop",
+  },
+  {
+    id: 9,
+    title: "viewme",
+    description: "Open any Markdown file in a clean popup window with viewme file.md. A dependency-free Python renderer with an outline sidebar, syntax-highlighted code, live reload, dark mode, and a locked-down local server.",
+    image: "/images/projects/12.png",
+    tag: ["All", "Tools"],
+    gitUrl: "https://github.com/ricozama121803/viewme",
+    previewUrl: "https://github.com/ricozama121803/viewme",
+  },
 ];
 
 const ProjectsSection = () => {
