@@ -86,6 +86,15 @@ const projectsData = [
     gitUrl: "https://github.com/ricozama121803/viewme",
     previewUrl: "https://github.com/ricozama121803/viewme",
   },
+  {
+    id: 10,
+    title: "ProfSpot | CSUF",
+    description: "A Cal State Fullerton version of ProfSpot, a RAG chatbot over every rated CSUF professor (~5,000) and ~120,000 reviews. It filters by department or course, shows rating, difficulty, and would-take-again at a glance, links to RateMyProfessors, and lets students pin professors to a local list and export it as a PDF.",
+    image: "/images/projects/13.png",
+    tag: ["All", "Web"],
+    gitUrl: "https://github.com/ricozama121803/profspot-csuf",
+    previewUrl: "https://github.com/ricozama121803/profspot-csuf",
+  },
 ];
 
 const ProjectsSection = () => {
