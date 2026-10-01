@@ -106,9 +106,10 @@ const ProjectsSection = () => {
     setTag(newTag);
   };
 
-  const filteredProjects = projectsData.filter((project) =>
-    project.tag.includes(tag)
-  );
+  // newest first: new projects are appended to projectsData with the next id
+  const filteredProjects = projectsData
+    .filter((project) => project.tag.includes(tag))
+    .sort((a, b) => b.id - a.id);
 
   const cardVariants = {
     initial: { y: 50, opacity: 0 },
