@@ -93,7 +93,7 @@ const projectsData = [
     image: "/images/projects/13.png",
     tag: ["All", "Web"],
     gitUrl: "https://github.com/ricozama121803/profspot-csuf",
-    previewUrl: "https://github.com/ricozama121803/profspot-csuf",
+    previewUrl: "https://profspot-csuf-psi.vercel.app/",
   },
 ];
 
