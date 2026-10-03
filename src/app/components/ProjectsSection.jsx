@@ -33,7 +33,7 @@ const projectsData = [
     previewUrl: "https://scene-scout-brown.vercel.app/",
   },
   {
-    id: 4,
+    id: 10,
     title: "Snap Shelf",
     description: "A Chrome extension for saving the exact piece of a webpage you need — a highlighted quote, a cropped screenshot, or an image — into a searchable, tagged side panel instead of leaving tabs open for reference.",
     image: "/images/projects/7.png",
@@ -42,7 +42,7 @@ const projectsData = [
     previewUrl: "https://chromewebstore.google.com/detail/snap-shelf/bjekhbjeiobccbjmjfjehkckdchaimhp",
   },
   {
-    id: 5,
+    id: 4,
     title: "Film Fest Scraper",
     description: "A Python pipeline that crawls Wikipedia, FilmFreeway, and regional directories to discover film festivals, maintaining a single deduplicated CSV database that refreshes on every run.",
     image: "/images/projects/8.png",
@@ -60,7 +60,7 @@ const projectsData = [
     previewUrl: "https://github.com/ricozama121803/3ds-homebrew",
   },
   {
-    id: 7,
+    id: 5,
     title: "Statics Playground",
     description: "An interactive single-file web app for learning engineering statics. Drag forces to explore moments, beam reactions, and 2D/3D cable equilibrium, with live equations, diagrams, and a scored Challenge mode.",
     image: "/images/projects/10.png",
@@ -78,7 +78,7 @@ const projectsData = [
     previewUrl: "https://github.com/ricozama121803/cpop",
   },
   {
-    id: 9,
+    id: 7,
     title: "viewme",
     description: "Open any Markdown file in a clean popup window with viewme file.md. A dependency-free Python renderer with an outline sidebar, syntax-highlighted code, live reload, dark mode, and a locked-down local server.",
     image: "/images/projects/12.png",
@@ -87,7 +87,7 @@ const projectsData = [
     previewUrl: "https://github.com/ricozama121803/viewme",
   },
   {
-    id: 10,
+    id: 9,
     title: "ProfSpot | CSUF",
     description: "A Cal State Fullerton version of ProfSpot, a RAG chatbot over every rated CSUF professor (~5,000) and ~120,000 reviews. It filters by department or course, shows rating, difficulty, and would-take-again at a glance, links to RateMyProfessors, and lets students pin professors to a local list and export it as a PDF.",
     image: "/images/projects/13.png",
