@@ -39,7 +39,7 @@ const projectsData = [
     image: "/images/projects/7.png",
     tag: ["All", "Tools"],
     gitUrl: "https://github.com/ricozama121803/snap-shelf",
-    previewUrl: "https://github.com/ricozama121803/snap-shelf",
+    previewUrl: "https://chromewebstore.google.com/detail/snap-shelf/bjekhbjeiobccbjmjfjehkckdchaimhp",
   },
   {
     id: 5,
