@@ -72,7 +72,7 @@ const HeroSection = () => {
                     1000,
                     "a Software Developer",
                     1000,
-                    "a Mechanical Engineering Student",
+                    "a Electrical Engineering Student",
                     1000,
                   ]}
                   wrapper="span"
@@ -83,7 +83,7 @@ const HeroSection = () => {
             </span>
           </h1>
           <p className="text-[#ADB7BE] text-base sm:text-lg mb-6 lg:text-xl">
-          🚀 CSUF Sophomore studying Mechanical Engineering, and a Software Developer focused on building intuitive, impactful web applications. I bring hands-on experience across full-stack development, AWS, and modern DevOps practices. Currently building at AUTODCP, and always excited to keep learning and shipping.
+          🚀 CSUF Sophomore studying Electrical Engineering, and a Software Developer focused on building intuitive, impactful web applications. I bring hands-on experience across full-stack development, AWS, and modern DevOps practices. Currently building at AUTODCP, and always excited to keep learning and shipping.
           </p>
           <div>
             <a
