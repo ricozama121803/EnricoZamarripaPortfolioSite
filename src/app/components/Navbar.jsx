@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import React, { useEffect, useState } from "react";
 import NavLink from "./NavLink";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/solid";
@@ -71,11 +72,15 @@ const Navbar = () => {
   return (
     <nav className="fixed mx-auto border border-[#33353F] top-0 left-0 right-0 z-10 bg-[#121212] bg-opacity-100">
       <div className="flex container lg:py-4 flex-wrap items-center justify-between mx-auto px-4 py-2">
-        <Link
-          href={"/"}
-          className="text-2xl md:text-5xl text-white font-semibold"
-        >
-          EZ
+        <Link href={"/"} aria-label="Enrico Zamarripa, home">
+          <Image
+            src="/images/ez-logo.png"
+            alt="EZ logo"
+            width={64}
+            height={64}
+            priority
+            className="h-10 w-10 md:h-16 md:w-16"
+          />
         </Link>
         <div className="mobile-menu block md:hidden">
           {!navbarOpen ? (
@@ -105,7 +110,7 @@ const Navbar = () => {
                     onClick={(e) => handleScroll(e, link.path)}
                     className={`relative pb-1 transition-colors ${
                       isActive
-                        ? "text-white font-semibold after:absolute after:left-0 after:-bottom-1 after:h-0.5 after:w-full after:bg-blue-400"
+                        ? "text-white font-semibold after:absolute after:left-0 after:-bottom-1 after:h-0.5 after:w-full after:bg-electric-500"
                         : "text-[#ADB7BE] hover:text-white"
                     }`}
                   >

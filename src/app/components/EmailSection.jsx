@@ -22,7 +22,7 @@ const EmailSection = () => {
       id="contact"
       className="grid md:grid-cols-1 my-12 md:my-12 py-16 sm:py-24 md:py-32 gap-4 relative overflow-hidden"
     >
-      <div className="bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-blue-800 to-transparent rounded-full h-96 w-96 z-0 blur-lg absolute top-1/2 -left-4 transform -translate-x-1/2 -translate-1/2"></div>
+      <div className="bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-electric-900 to-transparent rounded-full h-96 w-96 z-0 blur-lg absolute top-1/2 -left-4 transform -translate-x-1/2 -translate-1/2"></div>
       
       <div className="z-10 text-center">
         {/* Increased text size */}
@@ -47,7 +47,7 @@ const EmailSection = () => {
               onClick={handleCopyEmail}
             />
             {copied && (
-              <span className="absolute text-md text-blue-400 mt-2 left-1/2 transform -translate-x-1/2">
+              <span className="absolute text-md text-electric-500 mt-2 left-1/2 transform -translate-x-1/2">
                 Email copied!
               </span>
             )}

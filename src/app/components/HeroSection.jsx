@@ -54,7 +54,7 @@ const HeroSection = () => {
           className="col-span-8 min-w-0 w-full place-self-center text-center sm:text-left justify-self-start"
         >
           <h1 className="text-white mb-4 font-extrabold">
-            <span className="block text-3xl sm:text-5xl md:text-6xl lg:text-8xl text-transparent bg-clip-text bg-gradient-to-r from-blue-800 via-blue-600 to-blue-400">
+            <span className="block text-3xl sm:text-5xl md:text-6xl lg:text-8xl text-transparent bg-clip-text bg-gradient-to-r from-electric-700 via-electric-500 to-electric-300">
               Hello, I&apos;m
             </span>
             <span
@@ -88,7 +88,7 @@ const HeroSection = () => {
           <div>
             <a
               href="/#contact"
-              className="px-6 inline-block py-3 w-full sm:w-fit rounded-full bg-gradient-to-br from-blue-800 via-blue-600 to-blue-400 hover:bg-slate-200 text-white"
+              className="px-6 inline-block py-3 w-full sm:w-fit rounded-full bg-gradient-to-br from-electric-700 via-electric-500 to-electric-300 hover:bg-slate-200 text-white"
             >
               Contact Me
             </a>

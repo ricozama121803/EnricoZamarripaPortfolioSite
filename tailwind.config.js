@@ -18,6 +18,13 @@ module.exports = {
       ...colors,
       primary: colors.purple,
       secondary: colors.pink,
+      // blues sampled from the EZ lightning emblem
+      electric: {
+        300: "#54CAEB",
+        500: "#1B9AF3",
+        700: "#1269D8",
+        900: "#174AA1",
+      },
     },
   },
   plugins: [],
