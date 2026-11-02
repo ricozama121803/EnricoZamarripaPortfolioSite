@@ -95,6 +95,15 @@ const projectsData = [
     gitUrl: "https://github.com/ricozama121803/profspot-csuf",
     previewUrl: "https://profspot-csuf-psi.vercel.app/",
   },
+  {
+    id: 11,
+    title: "¡Pnch!",
+    description: "A terminal time clock built with Python and Textual. Punch in and out, note what you worked on, and review days and weeks with timelines. Approving a week locks it and exports a work log and invoice as a PDF.",
+    image: "/images/projects/14.png",
+    tag: ["All", "Tools"],
+    gitUrl: "https://github.com/ricozama121803/pnch",
+    previewUrl: "https://github.com/ricozama121803/pnch",
+  },
 ];
 
 const ProjectsSection = () => {
