@@ -3,21 +3,28 @@
 @tailwind utilities;
 
 :root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
+  --electric-300: 84, 202, 235;
+  --electric-500: 27, 154, 243;
+  --ink-950: #000000;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
-  }
+html {
+  scroll-behavior: smooth;
 }
 
-html, body {
+html,
+body {
   overflow-x: hidden;
+}
+
+body {
+  color: #e6f0ff;
+  background-color: var(--ink-950);
+}
+
+::selection {
+  background: rgba(var(--electric-500), 0.45);
+  color: #fff;
 }
 
 .no-scrollbar {
@@ -29,12 +36,83 @@ html, body {
   display: none;
 }
 
-body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+@layer utilities {
+  .text-glow {
+    text-shadow:
+      0 0 6px rgba(var(--electric-300), 0.65),
+      0 0 22px rgba(var(--electric-500), 0.55),
+      0 0 48px rgba(var(--electric-500), 0.35);
+  }
+  .text-glow-soft {
+    text-shadow: 0 0 18px rgba(var(--electric-500), 0.45);
+  }
+  .glow {
+    box-shadow:
+      0 0 0 1px rgba(var(--electric-300), 0.45),
+      0 0 18px rgba(var(--electric-500), 0.45),
+      0 0 42px -6px rgba(var(--electric-500), 0.6);
+  }
+}
+
+/* corner brackets, like a HUD frame */
+.hud-frame {
+  position: relative;
+}
+.hud-frame::before,
+.hud-frame::after {
+  content: "";
+  position: absolute;
+  width: 18px;
+  height: 18px;
+  border-color: rgb(var(--electric-300));
+  pointer-events: none;
+}
+.hud-frame::before {
+  top: -1px;
+  left: -1px;
+  border-top: 2px solid;
+  border-left: 2px solid;
+}
+.hud-frame::after {
+  bottom: -1px;
+  right: -1px;
+  border-bottom: 2px solid;
+  border-right: 2px solid;
+}
+
+/* a pulse of current running along the divider trace */
+@keyframes current-flow {
+  from {
+    stroke-dashoffset: 1200;
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+.current-pulse {
+  stroke-dasharray: 120 1080;
+  animation: current-flow 3.2s linear infinite;
+}
+
+/* the typing cursor in the hero, recolored */
+#home .type-target::after {
+  color: rgb(var(--electric-300));
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* keep plain #anchor jumps (footer links) clear of the fixed navbar */
+section[id] {
+  scroll-margin-top: 90px;
 }

@@ -3,8 +3,8 @@ const NavLink = ({ href, title, active, onClick }) => {
     <a
       href={href}
       onClick={onClick}
-      className={`block py-2 pl-3 pr-4 sm:text-xl rounded md:p-0 ${
-        active ? "text-white font-semibold" : "text-[#ADB7BE] hover:text-white"
+      className={`block py-2 pl-3 pr-4 font-mono uppercase tracking-widest sm:text-lg rounded md:p-0 ${
+        active ? "text-white text-glow-soft" : "text-slate-400 hover:text-white"
       }`}
     >
       {title}
