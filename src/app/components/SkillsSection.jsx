@@ -70,7 +70,7 @@ const SkillsSection = () => {
               onClick={() => setActive(category.title)}
               className={`shrink-0 relative pb-3 text-sm sm:text-base whitespace-nowrap transition-colors ${
                 active === category.title
-                  ? "text-white font-semibold after:absolute after:left-0 after:-bottom-px after:h-0.5 after:w-full after:bg-indigo-400"
+                  ? "text-white font-semibold after:absolute after:left-0 after:-bottom-px after:h-0.5 after:w-full after:bg-blue-400"
                   : "text-[#ADB7BE] hover:text-white"
               }`}
             >
@@ -83,7 +83,7 @@ const SkillsSection = () => {
             <span key={item}>
               {item}
               {i < activeCategory.items.length - 1 && (
-                <span className="text-indigo-400 mx-2">&middot;</span>
+                <span className="text-blue-400 mx-2">&middot;</span>
               )}
             </span>
           ))}

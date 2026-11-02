@@ -105,7 +105,7 @@ const Navbar = () => {
                     onClick={(e) => handleScroll(e, link.path)}
                     className={`relative pb-1 transition-colors ${
                       isActive
-                        ? "text-white font-semibold after:absolute after:left-0 after:-bottom-1 after:h-0.5 after:w-full after:bg-indigo-400"
+                        ? "text-white font-semibold after:absolute after:left-0 after:-bottom-1 after:h-0.5 after:w-full after:bg-blue-400"
                         : "text-[#ADB7BE] hover:text-white"
                     }`}
                   >
