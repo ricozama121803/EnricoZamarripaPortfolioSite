@@ -13,8 +13,26 @@ const BLUE = [18, 105, 216];
 const INK = [20, 22, 26];
 const GREY = [110, 116, 125];
 
+// Embed the site font (JetBrains Mono) so the PDF matches the page.
+const FONT = "JetBrainsMono";
+const FONT_FILES = { normal: "JetBrainsMono-Regular.ttf", bold: "JetBrainsMono-Bold.ttf" };
+
+async function addSiteFont(doc) {
+  for (const [style, file] of Object.entries(FONT_FILES)) {
+    const buf = await (await fetch(`/fonts/${file}`)).arrayBuffer();
+    let binary = "";
+    const bytes = new Uint8Array(buf);
+    for (let i = 0; i < bytes.length; i += 0x8000) {
+      binary += String.fromCharCode(...bytes.subarray(i, i + 0x8000));
+    }
+    doc.addFileToVFS(file, btoa(binary));
+    doc.addFont(file, FONT, style);
+  }
+}
+
 export async function buildMatchReport(result, { projectsUsing, source }) {
   const doc = new jsPDF({ unit: "pt", format: "letter" });
+  await addSiteFont(doc);
   const pageW = doc.internal.pageSize.getWidth();
   const pageH = doc.internal.pageSize.getHeight();
   const margin = 54;
@@ -29,7 +47,7 @@ export async function buildMatchReport(result, { projectsUsing, source }) {
   };
 
   const text = (str, { size = 11, color = INK, style = "normal", gap = 4, indent = 0 } = {}) => {
-    doc.setFont("helvetica", style);
+    doc.setFont(FONT, style);
     doc.setFontSize(size);
     doc.setTextColor(...color);
     const lines = doc.splitTextToSize(str, width - indent);
