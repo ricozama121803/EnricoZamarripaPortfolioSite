@@ -61,6 +61,16 @@ export const projectsData = [
     previewUrl: "https://github.com/ricozama121803/3ds-homebrew",
   },
   {
+    id: 12,
+    title: "3DS Theme Studio",
+    description: "A web app for making custom Nintendo 3DS Home Menu themes. Crop pictures with a pixel-exact preview (16-bit colour with dithering), recolour the tiles, cursor and menus, add looping music (uploaded or recorded from another browser tab) and sound effects, then save the theme straight onto the SD card.",
+    image: "/images/projects/15.png",
+    tag: ["All", "Web", "Tools"],
+    tech: ["Next.js", "React", "JavaScript", "TypeScript", "Node", "Tailwind CSS"],
+    gitUrl: "https://github.com/ricozama121803/3ds-theme-studio",
+    previewUrl: "https://github.com/ricozama121803/3ds-theme-studio",
+  },
+  {
     id: 5,
     title: "Statics Playground",
     description: "An interactive single-file web app for learning engineering statics. Drag forces to explore moments, beam reactions, and 2D/3D cable equilibrium, with live equations, diagrams, and a scored Challenge mode.",
