@@ -4,21 +4,27 @@ import SkillsSection from "./components/SkillsSection";
 import ProjectsSection from "./components/ProjectsSection";
 import EmailSection from "./components/EmailSection";
 import Footer from "./components/Footer";
-import LightningCanvas from "./components/LightningCanvas";
-import SmokeBackground from "./components/SmokeBackground";
-import VoltDivider from "./components/VoltDivider";
+import { Spotlight } from "./components/ui/spotlight-new";
+import { BackgroundBeams } from "./components/ui/background-beams";
+
+const Divider = () => (
+  <div aria-hidden="true" className="my-4 h-px w-full bg-gradient-to-r from-transparent via-neutral-800 to-transparent" />
+);
 
 export default function Home() {
   return (
-    <main className="relative flex min-h-screen flex-col">
-      <SmokeBackground />
-      <LightningCanvas />
+    <main className="relative flex min-h-screen flex-col overflow-x-clip">
       <Navbar />
-      <div className="relative z-10 container mt-20 md:mt-24 mx-auto px-4 sm:px-6 lg:px-12 py-4">
-        <HeroSection />
-        <VoltDivider />
+      <header className="relative overflow-hidden border-b border-neutral-900 pt-20 md:pt-24">
+        <Spotlight />
+        <BackgroundBeams />
+        <div className="relative z-10 container mx-auto px-4 sm:px-6 lg:px-12">
+          <HeroSection />
+        </div>
+      </header>
+      <div className="relative z-10 container mx-auto px-4 sm:px-6 lg:px-12 py-10">
         <SkillsSection />
-        <VoltDivider />
+        <Divider />
         <ProjectsSection />
         <EmailSection />
       </div>

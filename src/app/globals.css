@@ -18,8 +18,8 @@ body {
 }
 
 body {
-  color: #e6f0ff;
-  background-color: var(--ink-950);
+  color: #e5e5e5;
+  background-color: #0a0a0a;
 }
 
 ::selection {
@@ -37,61 +37,15 @@ body {
 }
 
 @layer utilities {
-  .text-glow {
-    text-shadow:
-      0 0 6px rgba(var(--electric-300), 0.65),
-      0 0 22px rgba(var(--electric-500), 0.55),
-      0 0 48px rgba(var(--electric-500), 0.35);
-  }
   .text-glow-soft {
-    text-shadow: 0 0 18px rgba(var(--electric-500), 0.45);
+    text-shadow: 0 0 18px rgba(var(--electric-500), 0.35);
   }
-  .glow {
+  .glow-electric {
     box-shadow:
       0 0 0 1px rgba(var(--electric-300), 0.45),
       0 0 18px rgba(var(--electric-500), 0.45),
       0 0 42px -6px rgba(var(--electric-500), 0.6);
   }
-}
-
-/* corner brackets, like a HUD frame */
-.hud-frame {
-  position: relative;
-}
-.hud-frame::before,
-.hud-frame::after {
-  content: "";
-  position: absolute;
-  width: 18px;
-  height: 18px;
-  border-color: rgb(var(--electric-300));
-  pointer-events: none;
-}
-.hud-frame::before {
-  top: -1px;
-  left: -1px;
-  border-top: 2px solid;
-  border-left: 2px solid;
-}
-.hud-frame::after {
-  bottom: -1px;
-  right: -1px;
-  border-bottom: 2px solid;
-  border-right: 2px solid;
-}
-
-/* a pulse of current running along the divider trace */
-@keyframes current-flow {
-  from {
-    stroke-dashoffset: 1200;
-  }
-  to {
-    stroke-dashoffset: 0;
-  }
-}
-.current-pulse {
-  stroke-dasharray: 120 1080;
-  animation: current-flow 3.2s linear infinite;
 }
 
 /* the typing cursor in the hero, recolored */

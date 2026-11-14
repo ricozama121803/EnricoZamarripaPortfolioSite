@@ -1,6 +1,7 @@
 import './globals.css'
-import { JetBrains_Mono } from 'next/font/google'
+import { Inter, JetBrains_Mono } from 'next/font/google'
 
+const sans = Inter({ subsets: ['latin'], variable: '--font-sans' })
 const mono = JetBrains_Mono({ subsets: ['latin'], variable: '--font-mono' })
 
 export const metadata = {
@@ -11,8 +12,8 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en" className={`${mono.variable}`}>
-      <body className="font-sans antialiased">{children}</body>
+    <html lang="en" className={`dark ${sans.variable} ${mono.variable}`}>
+      <body className="min-h-screen bg-neutral-950 font-sans text-neutral-200 antialiased">{children}</body>
     </html>
   )
 }

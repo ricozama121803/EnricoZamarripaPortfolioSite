@@ -1,17 +1,18 @@
 "use client";
 import React, { useState } from "react";
-import GithubIcon from "../../../public/github-icon.svg";
-import GitlabIcon from "../../../public/gitlab-icon.svg";
-import LinkedinIcon from "../../../public/linkedin-icon.svg";
 import Link from "next/link";
-import Image from "next/image";
-import { EnvelopeIcon } from "@heroicons/react/24/outline";
+import { IconBrandGithub, IconBrandGitlab, IconBrandLinkedin, IconMail, IconCopy, IconCheck } from "@tabler/icons-react";
 import SectionHeading from "./SectionHeading";
+import GlowCard from "./GlowCard";
+import { HoverBorderGradient } from "./ui/hover-border-gradient";
 
 const EMAIL = "ricozama121803@gmail.com";
 
-const socialButton =
-  "flex h-16 w-16 sm:h-24 sm:w-24 items-center justify-center rounded-full border border-electric-700/70 bg-ink-800/80 transition-[transform,border-color,box-shadow] duration-200 ease-out hover:-translate-y-1 hover:border-electric-300 hover:shadow-[0_0_30px_-2px_rgba(27,154,243,0.9)]";
+const SOCIALS = [
+  { label: "GitHub", href: "https://github.com/ricozama121803", Icon: IconBrandGithub },
+  { label: "GitLab", href: "https://gitlab.com/ricozama121803", Icon: IconBrandGitlab },
+  { label: "LinkedIn", href: "https://www.linkedin.com/in/enrico-zamarripa-3ba2882a3/", Icon: IconBrandLinkedin },
+];
 
 const EmailSection = () => {
   const [copied, setCopied] = useState(false);
@@ -19,56 +20,54 @@ const EmailSection = () => {
   const handleCopyEmail = () => {
     navigator.clipboard.writeText(EMAIL);
     setCopied(true);
-    // Reset the copied state after a few seconds
     setTimeout(() => setCopied(false), 3000);
   };
 
   return (
-    <section id="contact" className="relative my-12 py-16 sm:py-24 md:py-32">
-      <div className="hud-frame relative overflow-hidden rounded-lg border border-ink-600 bg-ink-800/80 px-6 py-14 sm:px-12 sm:py-20 text-center">
+    <section id="contact" className="relative my-12 py-12 sm:py-20">
+      <GlowCard innerClassName="relative overflow-hidden px-6 py-14 text-center sm:px-12 sm:py-20">
         <div
           aria-hidden="true"
-          className="pointer-events-none absolute left-1/2 top-0 h-72 w-[36rem] max-w-full -translate-x-1/2 -translate-y-1/2 rounded-full bg-electric-500/30 blur-3xl"
+          className="pointer-events-none absolute left-1/2 top-0 h-64 w-[36rem] max-w-full -translate-x-1/2 -translate-y-1/2 rounded-full bg-electric-500/15 blur-3xl"
         />
         <div className="relative">
           <SectionHeading index="03" label="Contact" title="Let's Connect" center />
-          <p className="text-slate-300/90 mt-6 mb-10 max-w-2xl mx-auto text-base sm:text-xl leading-relaxed">
+          <p className="mx-auto mb-10 mt-6 max-w-2xl text-base leading-relaxed text-neutral-400 sm:text-lg">
             I&apos;m currently looking for new opportunities, my inbox is always open.
             Whether you have a question or just want to say hi, I&apos;ll try my best
             to get back to you!
           </p>
-          <div className="flex flex-wrap justify-center gap-4 sm:gap-10">
-            <Link href="https://github.com/ricozama121803" className={socialButton} aria-label="GitHub" target="_blank" rel="noopener noreferrer">
-              <Image src={GithubIcon} alt="" className="h-10 w-10 sm:h-12 sm:w-12" />
-            </Link>
-            <Link href="https://gitlab.com/ricozama121803" className={socialButton} aria-label="GitLab" target="_blank" rel="noopener noreferrer">
-              <Image src={GitlabIcon} alt="" className="h-10 w-10 sm:h-12 sm:w-12" />
-            </Link>
-            <Link
-              href="https://www.linkedin.com/in/enrico-zamarripa-3ba2882a3/"
-              className={socialButton}
-              aria-label="LinkedIn"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <Image src={LinkedinIcon} alt="" className="h-10 w-10 sm:h-12 sm:w-12" />
-            </Link>
-            <div className="relative">
-              <button type="button" onClick={handleCopyEmail} className={socialButton} aria-label="Copy email address">
-                <EnvelopeIcon className="h-10 w-10 sm:h-12 sm:w-12 text-slate-300" />
-              </button>
-              <span
-                role="status"
-                className={`absolute left-1/2 top-full mt-3 -translate-x-1/2 whitespace-nowrap font-mono text-xs uppercase tracking-widest text-electric-300 transition-opacity ${
-                  copied ? "opacity-100" : "opacity-0"
-                }`}
+          <div className="flex flex-col items-center gap-6">
+            <div className="flex flex-wrap items-center justify-center gap-3">
+              <HoverBorderGradient
+                as="a" href={`mailto:${EMAIL}`} containerClassName="rounded-full"
+                className="flex items-center gap-2 bg-neutral-950 px-6 py-2.5 text-sm font-semibold text-white"
               >
-                {copied ? "Email copied!" : ""}
-              </span>
+                <IconMail size={18} /> {EMAIL}
+              </HoverBorderGradient>
+              <button
+                type="button" onClick={handleCopyEmail} aria-label="Copy email address"
+                className="inline-flex items-center gap-2 rounded-full border border-neutral-800 px-4 py-2.5 text-sm font-medium text-neutral-300 transition hover:border-neutral-600 hover:bg-neutral-900 hover:text-white"
+              >
+                {copied ? <IconCheck size={16} className="text-electric-300" /> : <IconCopy size={16} />}
+                <span role="status">{copied ? "Copied!" : "Copy"}</span>
+              </button>
             </div>
+            <ul className="flex gap-3">
+              {SOCIALS.map(({ label, href, Icon }) => (
+                <li key={label}>
+                  <Link
+                    href={href} target="_blank" rel="noopener noreferrer" aria-label={label}
+                    className="flex h-12 w-12 items-center justify-center rounded-full border border-neutral-800 bg-neutral-900/70 text-neutral-300 transition hover:-translate-y-0.5 hover:border-neutral-600 hover:text-white"
+                  >
+                    <Icon size={22} />
+                  </Link>
+                </li>
+              ))}
+            </ul>
           </div>
         </div>
-      </div>
+      </GlowCard>
     </section>
   );
 };

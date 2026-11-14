@@ -3,7 +3,8 @@ import React, { useLayoutEffect, useRef } from "react";
 import Image from "next/image";
 import { TypeAnimation } from "react-type-animation";
 import { motion } from "framer-motion";
-import { BoltIcon } from "@heroicons/react/24/solid";
+import { IconMail, IconArrowRight } from "@tabler/icons-react";
+import { HoverBorderGradient } from "./ui/hover-border-gradient";
 
 const STATS = [
   { label: "Major", value: "Electrical Eng." },
@@ -52,35 +53,26 @@ const HeroSection = () => {
   }, []);
 
   return (
-    <section className="py-8 lg:py-16" id="home">
-      <div className="grid grid-cols-1 sm:grid-cols-12 gap-y-10">
+    <section className="pb-16 pt-10 lg:pb-24 lg:pt-16" id="home">
+      <div className="grid grid-cols-1 sm:grid-cols-12 gap-y-10 items-center">
         <motion.div
           initial={{ opacity: 0, y: 24 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
-          className="col-span-8 min-w-0 w-full place-self-center text-center sm:text-left justify-self-start"
+          className="col-span-8 min-w-0 w-full text-center sm:text-left"
         >
-          <h1 className="text-white mb-6 font-display font-bold uppercase">
-            <span className="block text-3xl sm:text-5xl md:text-6xl lg:text-8xl tracking-wide text-electric-300 text-glow animate-flicker">
-              Hello, I&apos;m
+          <p className="mb-4 inline-flex items-center gap-2 rounded-full border border-neutral-800 bg-neutral-900/60 px-3 py-1 text-xs text-neutral-400">
+            <span className="h-1.5 w-1.5 rounded-full bg-electric-300 shadow-[0_0_8px_rgba(84,202,235,0.8)]" />
+            Open to new opportunities
+          </p>
+          <h1 className="mb-6">
+            <span className="block bg-gradient-to-b from-white to-neutral-400 bg-clip-text text-4xl font-bold tracking-tight text-transparent sm:text-6xl lg:text-7xl">
+              Enrico Zamarripa
             </span>
-            <span
-              ref={rowRef}
-              className="block w-full overflow-hidden text-3xl sm:text-5xl md:text-6xl lg:text-8xl leading-tight"
-            >
-              <span
-                ref={textRef}
-                className="inline-block whitespace-nowrap origin-left text-glow-soft"
-              >
+            <span ref={rowRef} className="mt-3 block w-full overflow-hidden text-xl font-medium sm:text-3xl lg:text-4xl">
+              <span ref={textRef} className="inline-block whitespace-nowrap origin-left text-neutral-400">
                 <TypeAnimation
-                  sequence={[
-                    "Enrico",
-                    1000,
-                    "a Software Developer",
-                    1000,
-                    "a Electrical Engineering Student",
-                    1000,
-                  ]}
+                  sequence={["Software Developer", 1400, "Electrical Engineering Student", 1400]}
                   wrapper="span"
                   speed={50}
                   repeat={Infinity}
@@ -89,62 +81,55 @@ const HeroSection = () => {
               </span>
             </span>
           </h1>
-          <p className="text-slate-300/90 text-base sm:text-lg mb-8 lg:text-xl max-w-2xl sm:mx-0 mx-auto leading-relaxed">
+          <p className="mb-8 max-w-2xl text-base leading-relaxed text-neutral-400 sm:mx-0 mx-auto sm:text-lg">
             CSUF Sophomore studying Electrical Engineering, and a Software Developer focused on building intuitive software. I bring hands-on experience across full-stack development, AWS, and modern DevOps practices. Currently building at AUTODCP, and always excited to keep learning and shipping.
           </p>
-          <div className="flex flex-col sm:flex-row gap-4 sm:items-center">
-            <a
-              href="/#contact"
-              className="group inline-flex items-center justify-center gap-2 px-7 py-3 w-full sm:w-fit rounded-md bg-gradient-to-br from-electric-700 via-electric-500 to-electric-300 font-display font-semibold uppercase tracking-widest text-white glow transition-transform duration-200 ease-out hover:-translate-y-0.5"
+          <div className="flex flex-col gap-4 sm:flex-row sm:items-center">
+            <HoverBorderGradient
+              as="a" href="/#contact" containerClassName="rounded-full mx-auto sm:mx-0"
+              className="flex items-center gap-2 bg-neutral-950 px-6 py-2.5 text-sm font-semibold text-white"
             >
-              <BoltIcon className="h-5 w-5 transition-transform group-hover:scale-125 group-hover:rotate-12" />
-              Contact Me
-            </a>
+              <IconMail size={18} /> Contact me
+            </HoverBorderGradient>
             <a
               href="/#projects"
-              className="inline-flex items-center justify-center px-7 py-3 w-full sm:w-fit rounded-md border border-electric-700/70 font-display font-semibold uppercase tracking-widest text-electric-100 hover:border-electric-300 hover:text-white hover:shadow-[0_0_20px_-4px_rgba(27,154,243,0.8)] transition-[color,border-color,box-shadow] duration-200 ease-out"
+              className="inline-flex items-center justify-center gap-2 rounded-full border border-neutral-800 px-6 py-2.5 text-sm font-semibold text-neutral-300 transition hover:border-neutral-600 hover:bg-neutral-900 hover:text-white mx-auto sm:mx-0"
             >
-              View Projects
+              View projects <IconArrowRight size={16} />
             </a>
           </div>
-          <dl className="mt-10 grid grid-cols-3 gap-3 max-w-xl sm:mx-0 mx-auto font-mono text-left">
+          <dl className="mt-10 grid max-w-xl grid-cols-3 gap-3 text-left sm:mx-0 mx-auto">
             {STATS.map((stat) => (
-              <div key={stat.label} className="border-l-2 border-electric-500/70 pl-3">
-                <dt className="text-[10px] sm:text-xs uppercase tracking-[0.2em] text-slate-500">{stat.label}</dt>
-                <dd className="text-xs sm:text-sm text-electric-100 mt-1">{stat.value}</dd>
+              <div key={stat.label} className="rounded-xl border border-neutral-800 bg-neutral-900/50 px-3 py-2.5">
+                <dt className="font-mono text-[10px] uppercase tracking-[0.2em] text-neutral-500">{stat.label}</dt>
+                <dd className="mt-1 text-xs font-medium text-neutral-200 sm:text-sm">{stat.value}</dd>
               </div>
             ))}
           </dl>
         </motion.div>
         <motion.div
-          initial={{ opacity: 0, scale: 0.8 }}
+          initial={{ opacity: 0, scale: 0.9 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.6, delay: 0.15 }}
           className="col-span-4 place-self-center"
         >
-          <div className="relative w-[250px] h-[250px] lg:w-[400px] lg:h-[400px]">
-            {/* spinning arcs */}
+          <div className="relative h-[240px] w-[240px] lg:h-[360px] lg:w-[360px]">
+            {/* one faint arc of current drifting round the photo: the only nod to the old lightning theme */}
             <div
               aria-hidden="true"
-              className="absolute -inset-3 rounded-full animate-spin-slow will-change-transform"
+              className="absolute -inset-2 rounded-full animate-spin-slower will-change-transform"
               style={{
-                background:
-                  "conic-gradient(from 0deg, transparent 0 62%, rgba(27,154,243,0.9) 80%, #D6F3FF 86%, transparent 88%)",
-                WebkitMask: "radial-gradient(farthest-side, transparent calc(100% - 3px), #000 calc(100% - 2px))",
-                mask: "radial-gradient(farthest-side, transparent calc(100% - 3px), #000 calc(100% - 2px))",
-                filter: "drop-shadow(0 0 6px #1B9AF3)",
+                background: "conic-gradient(from 0deg, transparent 0 70%, rgba(27,154,243,0.55) 86%, rgba(214,243,255,0.8) 90%, transparent 92%)",
+                WebkitMask: "radial-gradient(farthest-side, transparent calc(100% - 2px), #000 calc(100% - 1px))",
+                mask: "radial-gradient(farthest-side, transparent calc(100% - 2px), #000 calc(100% - 1px))",
               }}
             />
-            <div
-              aria-hidden="true"
-              className="absolute -inset-7 rounded-full border border-dashed border-electric-700/50 animate-spin-slower will-change-transform"
-            />
-            <div className="absolute inset-0 rounded-full bg-[radial-gradient(circle_at_50%_40%,_#16181B,_#000000_70%)] border border-electric-700/60 shadow-[0_0_60px_-10px_rgba(27,154,243,0.7),inset_0_0_40px_rgba(27,154,243,0.25)] overflow-hidden">
+            <div className="absolute inset-0 overflow-hidden rounded-full border border-neutral-800 bg-neutral-900 shadow-[0_0_80px_-30px_rgba(27,154,243,0.6)]">
               <Image
                 src="/images/1702068264616.jpeg"
                 alt="Photo of Enrico Zamarripa"
                 fill
-                sizes="(min-width: 1024px) 400px, 250px"
+                sizes="(min-width: 1024px) 360px, 240px"
                 className="object-cover"
                 priority
               />

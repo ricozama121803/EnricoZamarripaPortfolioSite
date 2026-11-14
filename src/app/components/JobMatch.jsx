@@ -169,7 +169,7 @@ const JobMatch = () => {
               type="button"
               onClick={() => analyze(text)}
               disabled={text.trim().length < 20 || status === "reading"}
-              className="inline-flex items-center justify-center gap-2 rounded-md bg-gradient-to-br from-electric-700 via-electric-500 to-electric-300 px-6 py-3 font-display font-semibold uppercase tracking-widest text-white glow transition hover:-translate-y-0.5 disabled:cursor-not-allowed disabled:opacity-40 disabled:shadow-none disabled:hover:translate-y-0"
+              className="inline-flex items-center justify-center gap-2 rounded-md bg-gradient-to-br from-electric-700 via-electric-500 to-electric-300 px-6 py-3 font-display font-semibold uppercase tracking-widest text-white glow-electric transition hover:-translate-y-0.5 disabled:cursor-not-allowed disabled:opacity-40 disabled:shadow-none disabled:hover:translate-y-0"
             >
               <BoltIcon className="h-5 w-5" aria-hidden="true" />
               Check match
@@ -309,7 +309,7 @@ const JobMatch = () => {
                 type="button"
                 onClick={downloadReport}
                 disabled={downloading}
-                className="inline-flex items-center justify-center gap-2 rounded-md bg-gradient-to-br from-electric-700 via-electric-500 to-electric-300 px-5 py-2.5 font-display font-semibold uppercase tracking-widest text-sm text-white glow transition hover:-translate-y-0.5 disabled:opacity-50"
+                className="inline-flex items-center justify-center gap-2 rounded-md bg-gradient-to-br from-electric-700 via-electric-500 to-electric-300 px-5 py-2.5 font-display font-semibold uppercase tracking-widest text-sm text-white glow-electric transition hover:-translate-y-0.5 disabled:opacity-50"
               >
                 <ArrowDownTrayIcon className="h-5 w-5" aria-hidden="true" />
                 {downloading ? "Preparing…" : "Download report"}

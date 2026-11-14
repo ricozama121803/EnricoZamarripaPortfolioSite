@@ -70,7 +70,7 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="fixed top-0 left-0 right-0 z-40 bg-ink-950/90">
+    <nav className="fixed top-0 left-0 right-0 z-40 border-b border-neutral-900/80 bg-neutral-950/70 backdrop-blur-md">
       <div className="flex container lg:py-4 flex-wrap items-center justify-between mx-auto px-4 py-2">
         <Link href={"/"} aria-label="Enrico Zamarripa, home" className="group flex items-center gap-3">
           <Image
@@ -79,31 +79,31 @@ const Navbar = () => {
             width={64}
             height={64}
             priority
-            className="h-10 w-10 md:h-14 md:w-14 rounded-full transition-[filter] duration-300 group-hover:drop-shadow-[0_0_14px_rgba(27,154,243,0.9)]"
+            className="h-9 w-9 md:h-11 md:w-11 rounded-full transition-[filter] duration-300 group-hover:drop-shadow-[0_0_10px_rgba(27,154,243,0.5)]"
           />
-          <span className="hidden sm:block font-display uppercase tracking-[0.2em] text-sm text-white">
-            Enrico<span className="text-electric-300"> Zamarripa</span>
+          <span className="hidden sm:block text-sm font-semibold tracking-tight text-neutral-100">
+            Enrico Zamarripa
           </span>
         </Link>
         <div className="mobile-menu block md:hidden">
           {!navbarOpen ? (
             <button
               onClick={() => setNavbarOpen(true)}
-              className="flex items-center px-3 py-2 border rounded border-electric-700 text-electric-300 hover:text-white hover:border-electric-300"
+              className="flex items-center px-3 py-2 border rounded-lg border-neutral-800 text-neutral-300 hover:text-white hover:border-neutral-600"
             >
               <Bars3Icon className="h-5 w-5" />
             </button>
           ) : (
             <button
               onClick={() => setNavbarOpen(false)}
-              className="flex items-center px-3 py-2 border rounded border-electric-700 text-electric-300 hover:text-white hover:border-electric-300"
+              className="flex items-center px-3 py-2 border rounded-lg border-neutral-800 text-neutral-300 hover:text-white hover:border-neutral-600"
             >
               <XMarkIcon className="h-5 w-5" />
             </button>
           )}
         </div>
         <div className="menu hidden md:block md:w-auto" id="navbar">
-          <ul className="flex p-4 md:p-0 md:flex-row md:space-x-8 mt-0 font-mono text-sm uppercase tracking-widest">
+          <ul className="flex p-4 md:p-0 md:flex-row md:space-x-1 mt-0 text-sm">
             {navLinks.map((link, index) => {
               const isActive = activeSection === link.path.slice(1);
               return (
@@ -111,14 +111,12 @@ const Navbar = () => {
                   <a
                     href={link.path}
                     onClick={(e) => handleScroll(e, link.path)}
-                    className={`relative pb-1 transition-colors ${
-                      isActive
-                        ? "text-white text-glow-soft after:absolute after:left-0 after:-bottom-1 after:h-0.5 after:w-full after:bg-electric-300 after:shadow-[0_0_10px_2px_rgba(27,154,243,0.8)]"
-                        : "text-[#ADB7BE] hover:text-white"
+                    className={`relative rounded-full px-4 py-2 transition-colors ${
+                      isActive ? "bg-neutral-800/70 text-white" : "text-neutral-400 hover:text-white"
                     }`}
                   >
-                    <span className="text-electric-500 mr-1">0{index + 1}.</span>
                     {link.title}
+                    {isActive && <span aria-hidden="true" className="absolute inset-x-4 -bottom-px h-px bg-gradient-to-r from-transparent via-electric-300/70 to-transparent" />}
                   </a>
                 </li>
               );
@@ -126,8 +124,6 @@ const Navbar = () => {
           </ul>
         </div>
       </div>
-      {/* live wire along the bottom edge */}
-      <div className="h-px w-full bg-gradient-to-r from-transparent via-electric-500 to-transparent opacity-70" />
       {navbarOpen ? (
         <MenuOverlay
           links={navLinks}
