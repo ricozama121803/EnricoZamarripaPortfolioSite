@@ -60,6 +60,7 @@ export const projectsData = [
     gitUrl: "https://github.com/ricozama121803/3ds-homebrew/tree/main/tuffyrun",
     previewUrl: "https://github.com/ricozama121803/3ds-homebrew/tree/main/tuffyrun",
     downloadUrl: "https://github.com/ricozama121803/3ds-homebrew/releases/latest",
+    group: "3ds-games",
   },
   {
     id: 14,
@@ -71,6 +72,7 @@ export const projectsData = [
     gitUrl: "https://github.com/ricozama121803/3ds-homebrew/tree/main/grand-theft-otto",
     previewUrl: "https://github.com/ricozama121803/3ds-homebrew/tree/main/grand-theft-otto",
     downloadUrl: "https://github.com/ricozama121803/3ds-homebrew/releases/latest",
+    group: "3ds-games",
   },
   {
     id: 15,
@@ -82,6 +84,7 @@ export const projectsData = [
     gitUrl: "https://github.com/ricozama121803/3ds-homebrew/tree/main/sunset-ops",
     previewUrl: "https://github.com/ricozama121803/3ds-homebrew/tree/main/sunset-ops",
     downloadUrl: "https://github.com/ricozama121803/3ds-homebrew/releases/latest",
+    group: "3ds-games",
   },
   {
     id: 16,
@@ -93,6 +96,7 @@ export const projectsData = [
     gitUrl: "https://github.com/ricozama121803/3ds-homebrew/tree/main/webslinger",
     previewUrl: "https://github.com/ricozama121803/3ds-homebrew/tree/main/webslinger",
     downloadUrl: "https://github.com/ricozama121803/3ds-homebrew/releases/latest",
+    group: "3ds-games",
   },
   {
     id: 17,
@@ -104,6 +108,7 @@ export const projectsData = [
     gitUrl: "https://github.com/ricozama121803/3ds-homebrew/tree/main/grand-theft-otto-2",
     previewUrl: "https://github.com/ricozama121803/3ds-homebrew/tree/main/grand-theft-otto-2",
     downloadUrl: "https://github.com/ricozama121803/3ds-homebrew/releases/latest",
+    group: "3ds-games",
   },
   {
     id: 18,
@@ -115,6 +120,7 @@ export const projectsData = [
     gitUrl: "https://github.com/ricozama121803/3ds-homebrew/tree/main/beatpad",
     previewUrl: "https://github.com/ricozama121803/3ds-homebrew/tree/main/beatpad",
     downloadUrl: "https://github.com/ricozama121803/3ds-homebrew/releases/latest",
+    group: "3ds-games",
   },
   {
     id: 12,
@@ -175,5 +181,17 @@ export const projectsData = [
     tech: ["Python"],
     gitUrl: "https://github.com/ricozama121803/pnch",
     previewUrl: "https://github.com/ricozama121803/pnch",
+  },
+];
+
+// Projects with the same `group` are shown as one stacked tile under "All" that opens like a folder.
+export const projectGroups = [
+  {
+    id: "3ds-games",
+    title: "3DS Games",
+    description: "Six original Nintendo 3DS games written in C with devkitPro and citro2d/citro3d, from an endless runner to fully 3D sandboxes and a rhythm game with its own song studio. Each runs on real hardware and has a PC harness for previews and tests.",
+    tag: ["All", "Games"],
+    gitUrl: "https://github.com/ricozama121803/3ds-homebrew",
+    downloadUrl: "https://github.com/ricozama121803/3ds-homebrew/releases/latest",
   },
 ];

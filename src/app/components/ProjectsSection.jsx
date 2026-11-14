@@ -1,9 +1,10 @@
 "use client";
 import React, { useState } from "react";
 import ProjectCard from "./ProjectCard";
+import StackCard from "./StackCard";
 import ProjectTag from "./ProjectTag";
 import SectionHeading from "./SectionHeading";
-import { projectsData } from "../data/projects";
+import { projectsData, projectGroups } from "../data/projects";
 import { AnimatePresence, motion } from "framer-motion";
 
 
@@ -14,10 +15,18 @@ const ProjectsSection = () => {
     setTag(newTag);
   };
 
-  // newest first: new projects are appended to projectsData with the next id
-  const filteredProjects = projectsData
-    .filter((project) => project.tag.includes(tag))
-    .sort((a, b) => b.id - a.id);
+  // newest first: new projects are appended to projectsData with the next id.
+  // Under "All", grouped projects collapse into one stack tile (placed by its newest member);
+  // a specific filter like "Games" lists them individually.
+  const matching = projectsData.filter((project) => project.tag.includes(tag));
+  const stacked = tag === "All" ? projectGroups.filter((g) => matching.some((p) => p.group === g.id)) : [];
+  const filteredProjects = [
+    ...matching.filter((p) => !stacked.some((g) => g.id === p.group)),
+    ...stacked.map((g) => {
+      const members = matching.filter((p) => p.group === g.id).sort((a, b) => b.id - a.id);
+      return { ...g, stack: true, members, key: `group-${g.id}`, id: members[0].id };
+    }),
+  ].sort((a, b) => b.id - a.id);
 
   const cardVariants = {
     hidden: { y: 16, opacity: 0, scale: 0.98 },
@@ -54,7 +63,7 @@ const ProjectsSection = () => {
         <AnimatePresence mode="popLayout" initial={false}>
           {filteredProjects.map((project, index) => (
             <motion.li
-              key={project.id}
+              key={project.key || project.id}
               layout
               variants={cardVariants}
               initial="hidden"
@@ -68,6 +77,9 @@ const ProjectsSection = () => {
                 layout: { type: "spring", stiffness: 500, damping: 42 },
               }}
             >
+              {project.stack ? (
+                <StackCard group={project} members={project.members} />
+              ) : (
               <ProjectCard
                 title={project.title}
                 description={project.description}
@@ -77,6 +89,7 @@ const ProjectsSection = () => {
                 downloadUrl={project.downloadUrl}
                 tags={project.tag.filter((t) => t !== "All")}
               />
+              )}
             </motion.li>
           ))}
         </AnimatePresence>
