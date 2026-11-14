@@ -1,5 +1,5 @@
 import React from "react";
-import { CodeBracketIcon, EyeIcon, ArrowUpRightIcon } from "@heroicons/react/24/outline";
+import { CodeBracketIcon, EyeIcon, ArrowUpRightIcon, ArrowDownTrayIcon } from "@heroicons/react/24/outline";
 import Link from "next/link";
 
 const iconLink =
@@ -7,7 +7,7 @@ const iconLink =
 const iconStyle =
   "h-8 w-8 text-electric-100 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 group-hover/link:text-white";
 
-const ProjectCard = ({ imgUrl, title, description, gitUrl, previewUrl, tags = [] }) => {
+const ProjectCard = ({ imgUrl, title, description, gitUrl, previewUrl, downloadUrl, tags = [] }) => {
   // the eye button opens the live deployment; projects without one (preview just points at GitHub) don't show it
   const hasDeployment = Boolean(previewUrl) && previewUrl !== gitUrl;
   return (
@@ -34,6 +34,11 @@ const ProjectCard = ({ imgUrl, title, description, gitUrl, previewUrl, tags = []
               <EyeIcon className={iconStyle} />
             </Link>
           )}
+          {downloadUrl && (
+            <Link href={downloadUrl} className={iconLink} target="_blank" rel="noopener noreferrer" aria-label={`Download ${title}`}>
+              <ArrowDownTrayIcon className={iconStyle} />
+            </Link>
+          )}
         </div>
       </div>
       <div className="text-white flex-1 flex flex-col py-5 px-5">
@@ -58,6 +63,11 @@ const ProjectCard = ({ imgUrl, title, description, gitUrl, previewUrl, tags = []
           {hasDeployment && (
             <Link href={previewUrl} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 text-electric-300 hover:text-white">
               Live <ArrowUpRightIcon className="h-3.5 w-3.5" />
+            </Link>
+          )}
+          {downloadUrl && (
+            <Link href={downloadUrl} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 text-electric-300 hover:text-white">
+              Download <ArrowDownTrayIcon className="h-3.5 w-3.5" />
             </Link>
           )}
         </div>

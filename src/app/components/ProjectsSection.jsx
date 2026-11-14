@@ -74,6 +74,7 @@ const ProjectsSection = () => {
                 imgUrl={project.image}
                 gitUrl={project.gitUrl}
                 previewUrl={project.previewUrl}
+                downloadUrl={project.downloadUrl}
                 tags={project.tag.filter((t) => t !== "All")}
               />
             </motion.li>

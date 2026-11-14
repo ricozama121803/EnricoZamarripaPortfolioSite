@@ -10,7 +10,7 @@ export const SKILL_CATEGORIES = [
   },
   {
     title: "Languages",
-    items: ["JavaScript", "TypeScript", "Python", "SQL", "PHP", "Java", "C++", "C#", "MATLAB"],
+    items: ["JavaScript", "TypeScript", "Python", "SQL", "PHP", "Java", "C", "C++", "C#", "MATLAB"],
   },
   {
     title: "Frameworks",
@@ -57,6 +57,7 @@ export const ALIASES = {
   JavaScript: ["js", "ecmascript"],
   TypeScript: ["ts"],
   Python: ["py"],
+  C: ["c language", "ansi c", "embedded c"],
   "C++": ["cpp", "cplusplus"],
   "C#": ["csharp", "dotnet"],
   Node: ["nodejs", "node.js"],
@@ -94,6 +95,8 @@ export const SKILL_TERMS = {
   SQL: ["sql"],
   PHP: ["php"],
   Java: ["java"],
+  // C on its own, but not inside C++, C#, Objective-C, C-level or C-suite
+  C: [/(?<![A-Za-z0-9.\-])C(?![A-Za-z0-9+#\-])/, "c language", "c programming", "ansi c", "embedded c"],
   "C++": ["c++", "cpp"],
   "C#": ["c#", "csharp"],
   MATLAB: ["matlab"],
@@ -203,8 +206,9 @@ export const OTHER_TECH = {
 
 const escape = (s) => s.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
 
-// whole-term regex: not glued to letters/digits on either side
+// whole-term regex: not glued to letters/digits on either side (a RegExp term is used as is)
 const termRegex = (term) => {
+  if (term instanceof RegExp) return term;
   const cs = typeof term === "object";
   const text = cs ? term.cs : term;
   const body = escape(text).replace(/ /g, "[\\s-]+");
