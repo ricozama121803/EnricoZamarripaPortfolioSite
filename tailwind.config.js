@@ -25,6 +25,7 @@ module.exports = {
           "8%, 10%": { opacity: "0.35" },
         },
         "spin-slow": { to: { transform: "rotate(360deg)" } },
+        aurora: { from: { backgroundPosition: "50% 50%, 50% 50%" }, to: { backgroundPosition: "350% 50%, 350% 50%" } },
         "pulse-dot": {
           "0%, 100%": { opacity: "1", transform: "scale(1)" },
           "50%": { opacity: "0.4", transform: "scale(0.7)" },
@@ -32,6 +33,7 @@ module.exports = {
       },
       animation: {
         flicker: "flicker 6s linear infinite",
+        aurora: "aurora 60s linear infinite",
         "spin-slow": "spin-slow 4s linear infinite",
         "spin-slower": "spin-slow 9s linear infinite reverse",
         "pulse-dot": "pulse-dot 1.6s ease-in-out infinite",

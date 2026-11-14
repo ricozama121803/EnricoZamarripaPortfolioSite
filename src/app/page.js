@@ -4,8 +4,7 @@ import SkillsSection from "./components/SkillsSection";
 import ProjectsSection from "./components/ProjectsSection";
 import EmailSection from "./components/EmailSection";
 import Footer from "./components/Footer";
-import { Spotlight } from "./components/ui/spotlight-new";
-import { BackgroundBeams } from "./components/ui/background-beams";
+import HeroBackground from "./components/HeroBackground";
 
 const Divider = () => (
   <div aria-hidden="true" className="my-4 h-px w-full bg-gradient-to-r from-transparent via-neutral-800 to-transparent" />
@@ -16,8 +15,7 @@ export default function Home() {
     <main className="relative flex min-h-screen flex-col overflow-x-clip">
       <Navbar />
       <header className="relative overflow-hidden border-b border-neutral-900 pt-20 md:pt-24">
-        <Spotlight />
-        <BackgroundBeams />
+        <HeroBackground />
         <div className="relative z-10 container mx-auto px-4 sm:px-6 lg:px-12">
           <HeroSection />
         </div>
