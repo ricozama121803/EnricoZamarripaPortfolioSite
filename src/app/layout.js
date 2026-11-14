@@ -13,7 +13,7 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en" className={`dark ${sans.variable} ${mono.variable}`}>
-      <body className="min-h-screen bg-neutral-950 font-sans text-neutral-200 antialiased">{children}</body>
+      <body className="min-h-screen font-sans text-neutral-200 antialiased">{children}</body>
     </html>
   )
 }

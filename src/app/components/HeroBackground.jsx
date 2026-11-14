@@ -12,7 +12,7 @@ const OPTIONS = [
   ["aurora", "Aurora"],
   ["stars", "Stars"],
 ];
-const DEFAULT = "beams";
+const DEFAULT = "stars";
 const DEV = process.env.NODE_ENV === "development";
 
 // where the pointer is, relative to an element (null when it's elsewhere)
@@ -74,61 +74,89 @@ function Aurora() {
   );
 }
 
-// Twinkling stars with an occasional shooting star, drawn on a canvas.
+// Twinkling stars (some tinted, a few bright ones with a glow) and shooting stars, on a canvas over two soft
+// nebula glows. The animation pauses while the hero is off-screen or the tab is hidden.
+const TINTS = ["214,243,255", "214,243,255", "214,243,255", "255,255,255", "84,202,235", "160,170,255"];
+
 function Stars() {
   const ref = useRef(null);
   useEffect(() => {
     const canvas = ref.current;
     const ctx = canvas.getContext("2d");
     const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    let w = 0, h = 0, raf = 0, stars = [], shot = null, nextShot = 1.5;
+    let w = 0, h = 0, raf = 0, stars = [], shots = [], nextShot = 0.8, visible = true;
     const resize = () => {
       const dpr = Math.min(2, window.devicePixelRatio || 1);
       w = canvas.clientWidth; h = canvas.clientHeight;
       canvas.width = w * dpr; canvas.height = h * dpr;
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-      stars = Array.from({ length: Math.round((w * h) / 5200) }, () => ({
-        x: Math.random() * w, y: Math.random() * h, r: Math.random() * 1.1 + 0.2,
-        a: Math.random() * 0.6 + 0.15, s: Math.random() * 1.5 + 0.5, p: Math.random() * 6.28,
-      }));
+      stars = Array.from({ length: Math.round((w * h) / 2600) }, () => {
+        const bright = Math.random() < 0.04;
+        return {
+          x: Math.random() * w, y: Math.random() * h,
+          r: bright ? 1.4 + Math.random() * 0.8 : 0.35 + Math.random() * 1.0,
+          a: bright ? 1 : 0.35 + Math.random() * 0.55,
+          s: 0.6 + Math.random() * 1.8, p: Math.random() * 6.28,
+          c: TINTS[Math.floor(Math.random() * TINTS.length)], bright,
+        };
+      });
     };
-    resize();
-    const ro = new ResizeObserver(resize);
-    ro.observe(canvas);
+    const draw = (t, dt) => {
+      ctx.clearRect(0, 0, w, h);
+      for (const s of stars) {
+        const tw = reduce ? 1 : 0.6 + 0.4 * Math.sin(t * s.s + s.p);
+        if (s.bright) {                                     // soft halo
+          const g = ctx.createRadialGradient(s.x, s.y, 0, s.x, s.y, s.r * 7);
+          g.addColorStop(0, `rgba(${s.c},${0.35 * tw})`); g.addColorStop(1, `rgba(${s.c},0)`);
+          ctx.fillStyle = g; ctx.beginPath(); ctx.arc(s.x, s.y, s.r * 7, 0, 6.283); ctx.fill();
+        }
+        ctx.fillStyle = `rgba(${s.c},${s.a * tw})`;
+        ctx.beginPath(); ctx.arc(s.x, s.y, s.r, 0, 6.283); ctx.fill();
+      }
+      if (reduce) return;
+      nextShot -= dt;
+      if (nextShot <= 0 && shots.length < 2) {
+        const ang = (18 + Math.random() * 30) * Math.PI / 180, v = 700 + Math.random() * 500;
+        shots.push({ x: Math.random() * w * 0.8, y: Math.random() * h * 0.45, vx: Math.cos(ang) * v, vy: Math.sin(ang) * v, life: 0, len: 160 + Math.random() * 120 });
+        nextShot = 1.2 + Math.random() * 2.8;
+      }
+      shots = shots.filter((sh) => {
+        sh.life += dt; sh.x += sh.vx * dt; sh.y += sh.vy * dt;
+        const n = Math.hypot(sh.vx, sh.vy), tx = sh.x - (sh.vx / n) * sh.len, ty = sh.y - (sh.vy / n) * sh.len;
+        const fade = Math.min(1, sh.life * 4) * Math.max(0, 1 - sh.life / 1.6);
+        const g = ctx.createLinearGradient(tx, ty, sh.x, sh.y);
+        g.addColorStop(0, "rgba(27,154,243,0)"); g.addColorStop(0.7, `rgba(84,202,235,${0.5 * fade})`); g.addColorStop(1, `rgba(255,255,255,${fade})`);
+        ctx.strokeStyle = g; ctx.lineWidth = 2; ctx.lineCap = "round";
+        ctx.beginPath(); ctx.moveTo(tx, ty); ctx.lineTo(sh.x, sh.y); ctx.stroke();
+        ctx.fillStyle = `rgba(255,255,255,${fade})`; ctx.beginPath(); ctx.arc(sh.x, sh.y, 1.6, 0, 6.283); ctx.fill();
+        return sh.life < 1.6 && sh.x < w + sh.len && sh.y < h + sh.len;
+      });
+    };
     let last = performance.now();
     const frame = (now) => {
       const dt = Math.min(0.05, (now - last) / 1000); last = now;
-      const t = now / 1000;
-      ctx.clearRect(0, 0, w, h);
-      for (const s of stars) {
-        const tw = reduce ? 1 : 0.65 + 0.35 * Math.sin(t * s.s + s.p);
-        ctx.fillStyle = `rgba(214,243,255,${s.a * tw})`;
-        ctx.beginPath(); ctx.arc(s.x, s.y, s.r, 0, 6.283); ctx.fill();
-      }
-      if (!reduce) {
-        nextShot -= dt;
-        if (!shot && nextShot <= 0) {
-          const ang = (20 + Math.random() * 25) * Math.PI / 180;
-          shot = { x: Math.random() * w * 0.7, y: Math.random() * h * 0.4, vx: Math.cos(ang) * 900, vy: Math.sin(ang) * 900, life: 0 };
-          nextShot = 2.5 + Math.random() * 4;
-        }
-        if (shot) {
-          shot.life += dt; shot.x += shot.vx * dt; shot.y += shot.vy * dt;
-          const len = 140, n = Math.hypot(shot.vx, shot.vy);
-          const tx = shot.x - (shot.vx / n) * len, ty = shot.y - (shot.vy / n) * len;
-          const g = ctx.createLinearGradient(tx, ty, shot.x, shot.y);
-          g.addColorStop(0, "rgba(27,154,243,0)"); g.addColorStop(1, "rgba(214,243,255,0.9)");
-          ctx.strokeStyle = g; ctx.lineWidth = 1.6; ctx.lineCap = "round";
-          ctx.beginPath(); ctx.moveTo(tx, ty); ctx.lineTo(shot.x, shot.y); ctx.stroke();
-          if (shot.x > w + len || shot.y > h + len || shot.life > 3) shot = null;
-        }
-      }
-      raf = requestAnimationFrame(frame);
+      draw(now / 1000, dt);
+      raf = visible && !document.hidden ? requestAnimationFrame(frame) : 0;
     };
-    raf = requestAnimationFrame(frame);
-    return () => { cancelAnimationFrame(raf); ro.disconnect(); };
+    const start = () => { if (!raf && visible && !document.hidden) { last = performance.now(); raf = requestAnimationFrame(frame); } };
+    resize();
+    draw(0, 0);
+    const ro = new ResizeObserver(() => { resize(); draw(performance.now() / 1000, 0); });
+    ro.observe(canvas);
+    const io = new IntersectionObserver(([e]) => { visible = e.isIntersecting; start(); });
+    io.observe(canvas);
+    const onVis = () => start();
+    document.addEventListener("visibilitychange", onVis);
+    if (!reduce) start();
+    return () => { cancelAnimationFrame(raf); ro.disconnect(); io.disconnect(); document.removeEventListener("visibilitychange", onVis); };
   }, []);
-  return <canvas ref={ref} aria-hidden="true" className="absolute inset-0 h-full w-full" />;
+  return (
+    <>
+      {/* nebula glows: static gradients, no animation cost */}
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_60%_55%_at_75%_30%,rgba(27,154,243,0.16),transparent_70%),radial-gradient(ellipse_50%_50%_at_15%_70%,rgba(123,140,255,0.12),transparent_70%)]" />
+      <canvas ref={ref} aria-hidden="true" className="absolute inset-0 h-full w-full" />
+    </>
+  );
 }
 
 export default function HeroBackground() {

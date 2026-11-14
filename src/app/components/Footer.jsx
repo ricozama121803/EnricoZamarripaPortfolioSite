@@ -15,7 +15,7 @@ const LINKS = [
 ];
 
 const Footer = () => (
-  <footer className="relative z-10 mt-8 border-t border-neutral-800/80 bg-neutral-950/80">
+  <footer className="relative z-10 mt-8 border-t border-white/5 bg-[#070b17]/80">
     <div className="container mx-auto flex flex-col items-center gap-6 px-4 py-10 sm:flex-row sm:justify-between sm:px-6 lg:px-12">
       <div className="text-center sm:text-left">
         <Link href="/" className="inline-flex items-center gap-3">

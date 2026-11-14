@@ -13,8 +13,9 @@ const Divider = () => (
 export default function Home() {
   return (
     <main className="relative flex min-h-screen flex-col overflow-x-clip">
+      <div aria-hidden="true" className="star-dust pointer-events-none fixed inset-0" />
       <Navbar />
-      <header className="relative overflow-hidden border-b border-neutral-900 pt-20 md:pt-24">
+      <header className="relative overflow-hidden border-b border-white/5 pt-20 md:pt-24">
         <HeroBackground />
         <div className="relative z-10 container mx-auto px-4 sm:px-6 lg:px-12">
           <HeroSection />

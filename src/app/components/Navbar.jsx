@@ -70,7 +70,7 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="fixed top-0 left-0 right-0 z-40 border-b border-neutral-900/80 bg-neutral-950/70 backdrop-blur-md">
+    <nav className="fixed top-0 left-0 right-0 z-40 border-b border-white/5 bg-[#070b17]/70 backdrop-blur-md">
       <div className="flex container lg:py-4 flex-wrap items-center justify-between mx-auto px-4 py-2">
         <Link href={"/"} aria-label="Enrico Zamarripa, home" className="group flex items-center gap-3">
           <Image

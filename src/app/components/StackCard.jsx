@@ -39,8 +39,8 @@ const StackCard = ({ group, members }) => {
     <>
       <div className="group/card relative h-full pt-3">
         {/* the cards underneath: they fan out a little on hover */}
-        <div aria-hidden="true" className="absolute inset-x-4 top-0 bottom-4 rounded-2xl border border-neutral-800 bg-neutral-900/60 transition-transform duration-300 ease-out rotate-[-2.5deg] group-hover/card:rotate-[-5deg] group-hover/card:-translate-x-2" />
-        <div aria-hidden="true" className="absolute inset-x-2 top-1.5 bottom-2 rounded-2xl border border-neutral-800 bg-neutral-900/80 transition-transform duration-300 ease-out rotate-[1.8deg] group-hover/card:rotate-[4deg] group-hover/card:translate-x-2" />
+        <div aria-hidden="true" className="absolute inset-x-4 top-0 bottom-4 rounded-2xl border border-slate-800/70 bg-[#0c1222]/60 transition-transform duration-300 ease-out rotate-[-2.5deg] group-hover/card:rotate-[-5deg] group-hover/card:-translate-x-2" />
+        <div aria-hidden="true" className="absolute inset-x-2 top-1.5 bottom-2 rounded-2xl border border-slate-800/70 bg-[#0c1222]/80 transition-transform duration-300 ease-out rotate-[1.8deg] group-hover/card:rotate-[4deg] group-hover/card:translate-x-2" />
 
         <GlowCard className="transition-transform duration-200 ease-out group-hover/card:-translate-y-1 bg-neutral-950" innerClassName="flex flex-col overflow-hidden">
           <button
