@@ -1,19 +1,20 @@
 import './globals.css'
-import { Inter, JetBrains_Mono } from 'next/font/google'
+import { Nunito } from 'next/font/google'
 
-const sans = Inter({ subsets: ['latin'], variable: '--font-sans' })
-const mono = JetBrains_Mono({ subsets: ['latin'], variable: '--font-mono' })
+const sans = Nunito({ subsets: ['latin'], weight: ['400', '600', '700', '800', '900'], variable: '--font-sans' })
 
 export const metadata = {
   title: 'Enrico Zamarripa | Portfolio',
   description:
-    'Enrico Zamarripa: Electrical Engineering student at CSUF and software developer.',
+    'Enrico Zamarripa: software developer and Electrical Engineering student at CSUF.',
 }
+
+export const viewport = { themeColor: '#f2f3f5' }
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en" className={`dark ${sans.variable} ${mono.variable}`}>
-      <body className="min-h-screen font-sans text-neutral-200 antialiased">{children}</body>
+    <html lang="en" className={sans.variable}>
+      <body className="min-h-screen font-sans text-slate-700 antialiased">{children}</body>
     </html>
   )
 }

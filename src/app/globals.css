@@ -2,75 +2,60 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --electric-300: 84, 202, 235;
-  --electric-500: 27, 154, 243;
-  --ink-950: #000000;
-}
-
-html {
-  scroll-behavior: smooth;
-}
-
 html,
 body {
   overflow-x: hidden;
 }
 
 body {
-  color: #e5e5e5;
-  /* deep blue-black rather than flat grey: a little colour so the page doesn't feel bleak */
-  background: linear-gradient(180deg, #070b17 0%, #0a0e1c 45%, #080a14 100%);
-  background-color: #070b17;
+  background-color: #f2f3f5;
+  color: #334155;
 }
 
-/* faint static star dust down the whole page (plain CSS, nothing animates) */
-.star-dust {
-  background-image:
-    radial-gradient(1px 1px at 20px 30px, rgba(214, 243, 255, 0.55), transparent 50%),
-    radial-gradient(1px 1px at 140px 90px, rgba(255, 255, 255, 0.4), transparent 50%),
-    radial-gradient(1.5px 1.5px at 260px 170px, rgba(84, 202, 235, 0.5), transparent 50%),
-    radial-gradient(1px 1px at 90px 230px, rgba(214, 243, 255, 0.35), transparent 50%),
-    radial-gradient(1px 1px at 330px 40px, rgba(160, 170, 255, 0.45), transparent 50%),
-    radial-gradient(1.2px 1.2px at 190px 300px, rgba(255, 255, 255, 0.35), transparent 50%);
-  background-size: 380px 340px;
+/* the light pinstriped backdrop behind the menu and channel screens */
+.pinstripes {
+  background-color: #f3f4f6;
+  background-image: repeating-linear-gradient(180deg, #f6f7f8 0 3px, #e9ebee 3px 4px);
+}
+
+/* channel tile frame: thick rounded light-grey bezel that lights up cyan when pointed at */
+.tile-frame {
+  position: relative;
+  display: block;
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  padding: 5px;
+  border-radius: 1.3rem;
+  border: 2px solid #c4c9cf;
+  background: linear-gradient(180deg, #ffffff, #e7e9ec);
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.08), inset 0 1px 0 #fff;
+  transition: border-color 0.15s, box-shadow 0.15s, transform 0.15s;
+}
+button.tile-frame:focus-visible,
+a.tile-frame:focus-visible {
+  outline: none;
+  border-color: #36b8f5;
+  box-shadow: 0 0 0 4px rgba(54, 184, 245, 0.28), 0 8px 22px rgba(54, 184, 245, 0.3);
+}
+@media (hover: hover) {
+  button.tile-frame:hover,
+  a.tile-frame:hover {
+    border-color: #36b8f5;
+    box-shadow: 0 0 0 4px rgba(54, 184, 245, 0.28), 0 8px 22px rgba(54, 184, 245, 0.3);
+    transform: translateY(-2px) scale(1.02);
+  }
+}
+
+/* tile art sizes its text in cqw so it scales with the tile */
+.art {
+  container-type: inline-size;
 }
 
 ::selection {
-  background: rgba(var(--electric-500), 0.45);
-  color: #fff;
-}
-
-.no-scrollbar {
-  scrollbar-width: none;
-  -ms-overflow-style: none;
-}
-
-.no-scrollbar::-webkit-scrollbar {
-  display: none;
-}
-
-@layer utilities {
-  .text-glow-soft {
-    text-shadow: 0 0 18px rgba(var(--electric-500), 0.35);
-  }
-  .glow-electric {
-    box-shadow:
-      0 0 0 1px rgba(var(--electric-300), 0.45),
-      0 0 18px rgba(var(--electric-500), 0.45),
-      0 0 42px -6px rgba(var(--electric-500), 0.6);
-  }
-}
-
-/* the typing cursor in the hero, recolored */
-#home .type-target::after {
-  color: rgb(var(--electric-300));
+  background: rgba(54, 184, 245, 0.35);
 }
 
 @media (prefers-reduced-motion: reduce) {
-  html {
-    scroll-behavior: auto;
-  }
   *,
   *::before,
   *::after {
@@ -78,9 +63,4 @@ body {
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
   }
-}
-
-/* keep plain #anchor jumps (footer links) clear of the fixed navbar */
-section[id] {
-  scroll-margin-top: 90px;
 }

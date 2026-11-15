@@ -1,6 +1,8 @@
 /** @type {import('tailwindcss').Config} */
 const colors = require("tailwindcss/colors");
 module.exports = {
+  // hover styles only on devices that can really hover, so tapped tiles on phones don't stay highlighted
+  future: { hoverOnlyWhenSupported: true },
   darkMode: "class",   // Aceternity components style themselves with dark: (the <html> has class="dark")
   content: [
     "./src/pages/**/*.{js,ts,jsx,tsx,mdx}",

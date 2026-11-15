@@ -182,6 +182,16 @@ export const projectsData = [
     gitUrl: "https://github.com/ricozama121803/pnch",
     previewUrl: "https://github.com/ricozama121803/pnch",
   },
+  {
+    id: 19,
+    title: "UmbraFlow",
+    description: "Polished demo videos of your web app from two commands. Run umbra start, use your app in Chrome like you normally would, then umbra stop renders a video with automatic zooms, a smooth cursor and fast-forwarded pauses, plus snapshots of every page. Emails and usernames are swapped for fake data live in the page, so your real details never reach a frame. Runs fully locally.",
+    image: "/images/projects/22.png",
+    tag: ["All", "Tools"],
+    tech: ["TypeScript", "Node", "Playwright", "Linux"],
+    gitUrl: "https://github.com/ricozama121803/umbraflow",
+    previewUrl: "https://github.com/ricozama121803/umbraflow",
+  },
 ];
 
 // Projects with the same `group` are shown as one stacked tile under "All" that opens like a folder.
