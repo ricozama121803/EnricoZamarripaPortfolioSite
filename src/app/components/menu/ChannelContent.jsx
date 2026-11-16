@@ -1,11 +1,11 @@
 "use client";
 import { useState } from "react";
 import Image from "next/image";
-import { IconBrandGithub, IconCopy, IconExternalLink, IconDownload, IconSearch } from "@tabler/icons-react";
+import { IconBrandGithub, IconCopy, IconExternalLink, IconDownload, IconFileText, IconSearch } from "@tabler/icons-react";
 import { SKILL_CATEGORIES, matchesQuery } from "../../data/skills";
 import SkillLogo from "./SkillLogo";
 import Tile from "./Tile";
-import { hasDeployment } from "./tiles";
+import { RESUME, hasDeployment } from "./tiles";
 
 const [EXPERIENCE, ...SKILLS] = SKILL_CATEGORIES;
 
@@ -50,6 +50,11 @@ export function channelActions(tile, { openTile }) {
       ].filter(Boolean);
     case "about":
       return [{ label: "Copy my email", onClick: () => openTile("contact"), Icon: IconCopy }];
+    case "resume":
+      return [
+        { label: "View resume", href: RESUME.pdf, Icon: IconFileText },
+        { label: "Download", href: RESUME.pdf, download: RESUME.fileName, Icon: IconDownload },
+      ];
     default:
       return [];
   }
@@ -200,6 +205,30 @@ function SkillsBody() {
   );
 }
 
+// the resume, readable right here: the PDF itself on wide screens (phones show PDFs badly inline,
+// so they get a sharp picture of the page instead); the bar below opens or downloads the file
+function ResumeBody() {
+  return (
+    <>
+      <Heading>Resume</Heading>
+      <p className="mt-4 text-lg leading-relaxed text-slate-600">
+        One page: experience at AUTODCP, projects, skills and education. Open it full size or download the PDF
+        with the buttons below.
+      </p>
+      <iframe
+        src={`${RESUME.pdf}#view=FitH`} title="Enrico Zamarripa resume (PDF)"
+        className="mt-6 hidden aspect-[8.5/11] w-full rounded-2xl border-2 border-[#d5d9de] bg-white md:block"
+      />
+      <a href={RESUME.pdf} target="_blank" rel="noopener noreferrer" className="mt-6 block md:hidden">
+        <Image
+          src={RESUME.page} alt="Enrico Zamarripa's resume, page 1" width={1700} height={2200} sizes="90vw"
+          className="h-auto w-full rounded-2xl border-2 border-[#d5d9de] bg-white"
+        />
+      </a>
+    </>
+  );
+}
+
 export default function ChannelBody({ tile, openTile }) {
   switch (tile.kind) {
     case "folder": return <FolderBody folder={tile} openTile={openTile} />;
@@ -207,6 +236,7 @@ export default function ChannelBody({ tile, openTile }) {
     case "group": return <GroupBody group={tile.group} />;
     case "about": return <AboutBody />;
     case "skills": return <SkillsBody />;
+    case "resume": return <ResumeBody />;
     default: return null;
   }
 }

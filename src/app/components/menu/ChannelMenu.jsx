@@ -82,9 +82,10 @@ function ChannelScreen({ tile, from, depth, onBack, onMenu, openTile }) {
             </button>
           )}
           <button ref={depth > 0 ? undefined : firstRef} type="button" onClick={onMenu} className={pillButton}>Menu</button>
-          {actions.map(({ label, href, onClick, Icon, iconOnly }) =>
+          {actions.map(({ label, href, download, onClick, Icon, iconOnly }) =>
             href ? (
-              <a key={label} href={href} target="_blank" rel="noopener noreferrer" aria-label={iconOnly ? `${label} (opens in a new tab)` : undefined} title={iconOnly ? label : undefined} className={iconOnly ? roundButton : pillButton}>
+              // `download` saves the file under that name instead of opening it
+              <a key={label} href={href} {...(download ? { download } : { target: "_blank", rel: "noopener noreferrer" })} aria-label={iconOnly ? `${label} (opens in a new tab)` : undefined} title={iconOnly ? label : undefined} className={iconOnly ? roundButton : pillButton}>
                 <Icon className={iconOnly ? "h-6 w-6 md:h-8 md:w-8" : "h-5 w-5 md:h-6 md:w-6"} stroke={iconOnly ? 1.8 : 2.2} /> {!iconOnly && label}
               </a>
             ) : (

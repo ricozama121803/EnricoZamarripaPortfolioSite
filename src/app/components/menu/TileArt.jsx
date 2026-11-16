@@ -1,8 +1,8 @@
 import Image from "next/image";
-import { IconBrandGithub, IconBrandGitlab, IconBrandLinkedin, IconFolderFilled, IconMail } from "@tabler/icons-react";
+import { IconBrandGithub, IconBrandGitlab, IconBrandLinkedin, IconFileTypePdf, IconFolderFilled, IconMail } from "@tabler/icons-react";
 import SkillLogo from "./SkillLogo";
 import { SKILL_CATEGORIES } from "../../data/skills";
-import { EMAIL } from "./tiles";
+import { EMAIL, RESUME } from "./tiles";
 
 // The picture on a channel tile. Sizes are in container units (cqw), so the same art
 // scales cleanly from a small tile up to the big banner on the channel screen.
@@ -130,6 +130,21 @@ function ContactArt() {
   );
 }
 
+// the resume's real first page, as a sheet of paper on a soft blue desk
+function ResumeArt() {
+  return (
+    <div className="absolute inset-0 overflow-hidden" style={{ background: "linear-gradient(170deg,#eaf6fe 0%,#cfe9fb 100%)" }}>
+      <div className="absolute left-[14cqw] top-[7cqw] aspect-[8.5/11] w-[72cqw] -rotate-2 overflow-hidden rounded-[1.5cqw] bg-white shadow-[0_2cqw_5cqw_rgba(15,60,100,0.25)] ring-1 ring-slate-200">
+        <Image src={RESUME.preview} alt="" fill sizes="(min-width: 768px) 30vw, 45vw" className="object-cover object-top" />
+      </div>
+      <NameStrip
+        title="Resume" extra="PDF"
+        icon={<IconFileTypePdf aria-hidden="true" className="h-[6.4cqw] w-[6.4cqw] shrink-0 text-[#36b8f5]" stroke={2} />}
+      />
+    </div>
+  );
+}
+
 function LinkArt({ brand }) {
   const { Icon, bg, label, sub } = BRANDS[brand];
   return (
@@ -151,6 +166,7 @@ export default function TileArt({ tile }) {
     case "about": return <AboutArt />;
     case "skills": return <SkillsArt />;
     case "contact": return <ContactArt />;
+    case "resume": return <ResumeArt />;
     case "link": return <LinkArt brand={tile.brand} />;
     default: return null;
   }

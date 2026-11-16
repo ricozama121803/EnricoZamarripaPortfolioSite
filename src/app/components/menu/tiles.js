@@ -7,6 +7,14 @@ export const LINKS = {
   linkedin: "https://www.linkedin.com/in/enrico-zamarripa-3ba2882a3/",
 };
 
+// my resume, served from /public; the tile shows a picture of its page
+export const RESUME = {
+  pdf: "/Enrico_Zamarripa_Resume.pdf",
+  fileName: "Enrico_Zamarripa_Resume.pdf",
+  preview: "/images/resume-preview.png",
+  page: "/images/resume-page.png",
+};
+
 export const PER_PAGE = 12; // 4 x 3 on desktop
 
 const cleanTags = (tags) => tags.filter((t) => t !== "All");
@@ -59,6 +67,7 @@ export function buildChannels() {
     { id: "about", kind: "about", title: "About Me" },
     { id: "skills", kind: "skills", title: "Skills" },
     folder,
+    { id: "resume", kind: "resume", title: "Resume" },
     { id: "contact", kind: "contact", title: "Contact" },
     { id: "github", kind: "link", title: "GitHub", href: LINKS.github, brand: "github" },
     { id: "linkedin", kind: "link", title: "LinkedIn", href: LINKS.linkedin, brand: "linkedin" },
