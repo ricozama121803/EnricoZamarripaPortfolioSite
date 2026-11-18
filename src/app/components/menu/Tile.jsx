@@ -1,4 +1,5 @@
 "use client";
+import { memo } from "react";
 import { motion } from "framer-motion";
 import TileArt from "./TileArt";
 
@@ -7,7 +8,7 @@ import TileArt from "./TileArt";
 // sits in (desktop menu "d", phone menu "m", inside the Projects folder "f"); "bar" means a shortcut button.
 export const artId = (from, id) => `${from}-${id}`;
 
-export default function Tile({ tile, from, onOpen, className = "" }) {
+function Tile({ tile, from, onOpen, className = "" }) {
   if (tile.kind === "empty") {
     return (
       <div aria-hidden="true" className="tile-frame">
@@ -34,3 +35,6 @@ export default function Tile({ tile, from, onOpen, className = "" }) {
     </button>
   );
 }
+
+// tiles only change when their own props do, so opening or closing a channel skips them
+export default memo(Tile);

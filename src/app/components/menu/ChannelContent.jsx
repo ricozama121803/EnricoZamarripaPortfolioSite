@@ -5,6 +5,7 @@ import { IconBrandGithub, IconCopy, IconExternalLink, IconDownload, IconFileText
 import { SKILL_CATEGORIES, matchesQuery } from "../../data/skills";
 import SkillLogo from "./SkillLogo";
 import Tile from "./Tile";
+import { InProgressBadge } from "./TileArt";
 import { RESUME, hasDeployment } from "./tiles";
 
 const [EXPERIENCE, ...SKILLS] = SKILL_CATEGORIES;
@@ -96,7 +97,10 @@ function FolderBody({ folder, openTile }) {
 function ProjectBody({ project: p }) {
   return (
     <>
-      <Heading>{p.title}</Heading>
+      <div className="flex flex-wrap items-center gap-3">
+        <Heading>{p.title}</Heading>
+        {p.inProgress && <InProgressBadge className="text-xs sm:text-sm" />}
+      </div>
       <p className="mt-4 text-lg leading-relaxed text-slate-600">{p.description}</p>
       <BuiltWith tech={p.tech} />
     </>

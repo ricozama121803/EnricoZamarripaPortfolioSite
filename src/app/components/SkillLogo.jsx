@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { IconBolt, IconCircuitResistor, IconCode, IconComponents, IconDeviceMobile, IconSpider } from "@tabler/icons-react";
+import { IconBolt, IconCircuitResistor, IconCode, IconComponents, IconCube, IconDeviceMobile, IconSpider } from "@tabler/icons-react";
 
 // Colour logos for each skill, from Devicon (MIT licence, v2.16.0), saved in public/images/skills.
 // Skills Devicon has no logo for get a simple line icon instead.
@@ -49,6 +49,7 @@ const FALLBACK = {
   Shadcn: IconComponents,
   Soldering: IconCircuitResistor,
   BeautifulSoup: IconSpider,
+  SolidWorks: IconCube,
 };
 
 export default function SkillLogo({ name, className = "h-6 w-6" }) {

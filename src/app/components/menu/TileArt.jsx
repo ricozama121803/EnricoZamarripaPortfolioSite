@@ -17,6 +17,21 @@ const BRANDS = {
 const SHOWCASE = ["JavaScript", "TypeScript", "Python", "C", "C++", "React", "Next.js", "Node", "AWS", "Docker", "Terraform", "Git"];
 const SKILL_COUNT = SKILL_CATEGORIES.slice(1).reduce((n, c) => n + c.items.length, 0);
 
+// what a tile is drawn at: a quarter of the desktop menu, half a phone screen
+const TILE_SIZES = "(min-width: 768px) 30vw, 50vw";
+const BANNER_SIZES = "(min-width: 768px) 832px, 100vw";
+
+// a project still being built gets a pulsing badge in the corner of its art
+export const InProgressBadge = ({ className = "" }) => (
+  <span className={`inline-flex items-center gap-[0.45em] rounded-full bg-amber-400 px-[0.8em] py-[0.3em] font-extrabold uppercase tracking-wide text-amber-950 shadow ${className}`}>
+    <span className="relative flex h-[0.6em] w-[0.6em]">
+      <span className="absolute inset-0 animate-ping rounded-full bg-amber-900/60" />
+      <span className="relative h-full w-full rounded-full bg-amber-900" />
+    </span>
+    In progress
+  </span>
+);
+
 // the always-visible strip along the bottom of a project tile: its name and what it's built with
 function NameStrip({ title, tech = [], extra, icon }) {
   return (
@@ -35,22 +50,26 @@ function NameStrip({ title, tech = [], extra, icon }) {
   );
 }
 
-function ProjectArt({ project }) {
+// The banner reuses the tile's (already loaded) image underneath its sharper one, so it never flashes
+// empty while the tile zooms up into it.
+function ProjectArt({ project, banner }) {
   return (
     <div className="absolute inset-0 bg-slate-900">
-      <Image src={project.image} alt="" fill sizes="(min-width: 768px) 60vw, 50vw" className="object-cover object-top" />
+      <Image src={project.image} alt="" fill sizes={TILE_SIZES} className="object-cover object-top" />
+      {banner && <Image src={project.image} alt="" fill sizes={BANNER_SIZES} className="object-cover object-top" />}
+      {project.inProgress && <InProgressBadge className="absolute left-[3cqw] top-[3cqw] text-[3.6cqw]" />}
       <NameStrip title={project.title} tech={project.tech} />
     </div>
   );
 }
 
-function GroupArt({ group }) {
+function GroupArt({ group, banner }) {
   return (
     <div className="absolute inset-0 bg-slate-900">
       <div className="grid h-full grid-cols-3 grid-rows-2 gap-[0.6cqw]">
         {group.members.slice(0, 6).map((m) => (
           <div key={m.id} className="relative">
-            <Image src={m.image} alt="" fill sizes="20vw" className="object-cover" />
+            <Image src={m.image} alt="" fill sizes={banner ? "(min-width: 768px) 280px, 33vw" : "(min-width: 768px) 12vw, 20vw"} className="object-cover" />
           </div>
         ))}
       </div>
@@ -60,14 +79,14 @@ function GroupArt({ group }) {
 }
 
 // the Projects folder: a contact sheet of the newest projects
-function FolderArt({ folder }) {
+function FolderArt({ folder, banner }) {
   const total = folder.projects.reduce((n, t) => n + (t.kind === "group" ? t.group.members.length : 1), 0);
   return (
     <div className="absolute inset-0 bg-slate-900">
       <div className="grid h-full grid-cols-3 grid-rows-2 gap-[0.5cqw]">
         {folder.covers.map((src) => (
           <div key={src} className="relative">
-            <Image src={src} alt="" fill sizes="(min-width: 768px) 20vw, 33vw" className="object-cover object-top" />
+            <Image src={src} alt="" fill sizes={banner ? "(min-width: 768px) 280px, 33vw" : "(min-width: 768px) 17vw, 33vw"} className="object-cover object-top" />
           </div>
         ))}
       </div>
@@ -158,11 +177,11 @@ function LinkArt({ brand }) {
   );
 }
 
-export default function TileArt({ tile }) {
+export default function TileArt({ tile, banner = false }) {
   switch (tile.kind) {
-    case "project": return <ProjectArt project={tile.project} />;
-    case "group": return <GroupArt group={tile.group} />;
-    case "folder": return <FolderArt folder={tile} />;
+    case "project": return <ProjectArt project={tile.project} banner={banner} />;
+    case "group": return <GroupArt group={tile.group} banner={banner} />;
+    case "folder": return <FolderArt folder={tile} banner={banner} />;
     case "about": return <AboutArt />;
     case "skills": return <SkillsArt />;
     case "contact": return <ContactArt />;

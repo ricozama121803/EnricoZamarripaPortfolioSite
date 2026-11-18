@@ -2,60 +2,31 @@
 @tailwind components;
 @tailwind utilities;
 
+html {
+  scroll-behavior: smooth;
+  /* a little breathing room above a section when you jump to it */
+  scroll-padding-top: 1.5rem;
+}
+
 html,
 body {
   overflow-x: hidden;
 }
 
 body {
-  background-color: #f2f3f5;
-  color: #334155;
-}
-
-/* the light pinstriped backdrop behind the menu and channel screens */
-.pinstripes {
-  background-color: #f3f4f6;
-  background-image: repeating-linear-gradient(180deg, #f6f7f8 0 3px, #e9ebee 3px 4px);
-}
-
-/* channel tile frame: thick rounded light-grey bezel that lights up cyan when pointed at */
-.tile-frame {
-  position: relative;
-  display: block;
-  width: 100%;
-  aspect-ratio: 16 / 10;
-  padding: 5px;
-  border-radius: 1.3rem;
-  border: 2px solid #c4c9cf;
-  background: linear-gradient(180deg, #ffffff, #e7e9ec);
-  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.08), inset 0 1px 0 #fff;
-  transition: border-color 0.15s, box-shadow 0.15s, transform 0.15s;
-}
-button.tile-frame:focus-visible,
-a.tile-frame:focus-visible {
-  outline: none;
-  border-color: #36b8f5;
-  box-shadow: 0 0 0 4px rgba(54, 184, 245, 0.28), 0 8px 22px rgba(54, 184, 245, 0.3);
-}
-@media (hover: hover) {
-  button.tile-frame:hover,
-  a.tile-frame:hover {
-    border-color: #36b8f5;
-    box-shadow: 0 0 0 4px rgba(54, 184, 245, 0.28), 0 8px 22px rgba(54, 184, 245, 0.3);
-    transform: translateY(-2px) scale(1.02);
-  }
-}
-
-/* tile art sizes its text in cqw so it scales with the tile */
-.art {
-  container-type: inline-size;
+  /* deep blue-black night sky behind the starfield */
+  background: #05070f;
 }
 
 ::selection {
-  background: rgba(54, 184, 245, 0.35);
+  background: rgba(27, 154, 243, 0.4);
+  color: #fff;
 }
 
 @media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
   *,
   *::before,
   *::after {

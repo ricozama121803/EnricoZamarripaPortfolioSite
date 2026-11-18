@@ -19,6 +19,22 @@ export const PER_PAGE = 12; // 4 x 3 on desktop
 
 const cleanTags = (tags) => tags.filter((t) => t !== "All");
 
+// Folder order: these lead, in this order; these close it out, in this order; everything else sits
+// between them, newest first.
+const PINNED_FIRST = ["p-19", "p-1", "p-11", "p-10"]; // UmbraFlow, ProfSpot | UIUC, ¡Pnch!, Snap Shelf
+const PINNED_LAST = ["p-4", "p-2", "p-5"]; // Film Fest Scraper, QuizzAI, Statics Playground
+const rank = (t) => {
+  const first = PINNED_FIRST.indexOf(t.id);
+  if (first !== -1) return [0, first];
+  const last = PINNED_LAST.indexOf(t.id);
+  if (last !== -1) return [2, last];
+  return [1, -t.order];
+};
+const byRank = (a, b) => {
+  const [ga, ia] = rank(a), [gb, ib] = rank(b);
+  return ga - gb || ia - ib;
+};
+
 // All the channels. The main menu holds About, Skills, one big Projects folder and the ways to reach me;
 // the folder holds every project, newest first (grouped projects collapse into one sub-folder tile
 // placed by their newest member).
@@ -49,7 +65,7 @@ export function buildChannels() {
         title: g.title,
         group: { ...g, tags: cleanTags(g.tag) },
       })),
-  ].sort((a, b) => b.order - a.order);
+  ].sort(byRank);
 
   // the folder's cover shows the newest screenshots and the tools used most across all projects
   const tally = projectsData.flatMap((p) => p.tech || []).reduce((n, t) => ({ ...n, [t]: (n[t] || 0) + 1 }), {});

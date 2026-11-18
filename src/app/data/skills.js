@@ -48,7 +48,7 @@ export const SKILL_CATEGORIES = [
   },
   {
     title: "Tools",
-    items: ["Git", "Docker", "Linux", "Bash", "MySQL", "WordPress", "Soldering", "PowerShell"],
+    items: ["Git", "Docker", "Linux", "Bash", "MySQL", "WordPress", "Soldering", "SolidWorks", "PowerShell"],
   },
 ];
 
